@@ -92,7 +92,7 @@ function Service.init()
     for _, player: Player in players:GetPlayers() do
         playerAdded(player)
     end
-
+    
 end
 
 return Service
