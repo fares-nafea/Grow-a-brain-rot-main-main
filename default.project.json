@@ -1,0 +1,45 @@
+{
+  "name": "Grow-a-brain-rot",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "Remotes": {
+        "$className": "Folder",
+
+        "updateSheckles": {
+          "$className": "RemoteEvent"
+        }
+      }
+    },
+    "StarterGui": {
+      "shecklesUpdater": {
+        "$path": "src/client/shecklesUpdater.client.lua"
+      }
+    },
+    "ServerScriptService": {
+      "Server": {
+        "$path": "src/server/Server.server.lua"
+      },
+
+      "Services": {
+        "$className": "Folder",
+
+        "DataService": {
+          "$path": "src/server/services/DataService.lua",
+
+          "ProfileStore": {
+            "$path": "src/server/services/ProfileStore.lua"
+          },
+          "Template": {
+            "$path": "src/server/services/Template.lua"
+          }
+        },
+
+        "MoneyService": {
+          "$path": "src/server/services/MoneyService.lua"
+        }
+      }
+    }
+  }
+}
