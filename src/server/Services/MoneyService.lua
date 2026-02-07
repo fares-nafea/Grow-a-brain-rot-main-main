@@ -11,7 +11,7 @@ local Service = {
 }
 
 function Service.DataLoaded(player: Player)
-    ـ
+    
 end
 function Service.giveMoney(target: Player, amount: number)
 
