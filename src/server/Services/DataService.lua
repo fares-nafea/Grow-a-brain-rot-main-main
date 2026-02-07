@@ -76,7 +76,9 @@ function Service.init()
 	-- playerRemoved
 	local function playerRemoved(player: Player)
 		local profile = Service.Profiles[player]
-		if profile then
+		if profile ~= nil then
+
+			plotService.playerRemoved(player)
 			profile:EndSession()
 		end
 	end
