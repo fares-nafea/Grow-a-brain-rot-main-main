@@ -11,6 +11,9 @@
     "StarterGui": {
       "shecklesUpdater": {
         "$path": "src/client/shecklesUpdater.client.lua"
+      },
+      "buttonTPs": {
+        "$path": "src/client/buttonTPs.client.lua"
       }
     },
     "ServerScriptService": {
