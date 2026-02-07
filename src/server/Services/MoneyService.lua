@@ -24,3 +24,5 @@ function Service.giveMoney(target: Player, amount: number)
 end
 
 return Service
+
+
