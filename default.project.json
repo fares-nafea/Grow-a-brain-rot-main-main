@@ -5,11 +5,7 @@
 
     "ReplicatedStorage": {
       "Remotes": {
-        "$className": "Folder",
-
-        "updateSheckles": {
-          "$className": "RemoteEvent"
-        }
+        "$className": "Folder"
       }
     },
     "StarterGui": {

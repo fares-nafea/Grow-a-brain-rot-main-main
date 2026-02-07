@@ -12,7 +12,6 @@ function Service.updateShecklesCount(player: Player)
     local DataService = Service.cachedModules.DataService
     local profileData = DataService.getData(player)
     if profileData then
-        remotes.updateSheckles:FireClient(player, profileData.Sheckles)
         local leaderstats = player:FindFirstChild("leaderstats")
         if leaderstats then
             leaderstats.Sheckles.Value = profileData.Sheckles
@@ -31,9 +30,6 @@ function Service.dataLoaded(player: Player)
     leaderstats.Parent = player
     Service.updateShecklesCount(player)
 
-    task.delay(5, function()
-        Service.giveMoney(player, 100)
-    end)
 end
 function Service.giveMoney(target: Player, amount: number)
 	local DataService = Service.cachedModules.DataService
