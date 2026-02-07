@@ -29,11 +29,16 @@ function Service.getData(target: Player)
 end
 
 function Service.init()
+	-- DataLoaded
+	local moneyService = Service.cachedModules.MoneyService
+	local plotService = Service.cachedModules.PlotService
+
 
 	local function dataLoaded(player: Player)
 		local profile = Service.Profiles[player]
 		if profile then
-			Service.cachedModules.MoneyService.dataLoaded(player)
+			moneyService.dataLoaded(player)
+			plotService.dataLoaded(player)
 		end
 	end
 

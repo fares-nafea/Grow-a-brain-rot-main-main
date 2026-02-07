@@ -34,6 +34,9 @@
 
         "MoneyService": {
           "$path": "src/server/services/MoneyService.lua"
+        },
+        "PlotService": {
+          "$path": "src/server/services/PlotService.lua"
         }
       }
     }
