@@ -29,13 +29,14 @@ function Service.dataLoaded(player: Player)
         plot:SetAttribute("Owner", player.UserId)
 
         local playerSign: Model = plot.PlayerSign
-        playerSign.Main.TextLabel.Text = game.Name
-
+        playerSign.Main.SurfaceGui.TextLabel.Text = player.Name
+        
         local ImageSize = Enum.ThumbnailSize.Size420x420
         local ImageType = Enum.ThumbnailType.HeadShot
  
-        local content = players:GetUesrThumbnailAsync(player.UserId, ImageType, ImageSize)
+        local content = players:GetUserThumbnailAsync(player.UserId, ImageType, ImageSize)
     end
 end
+
 
 return Service
