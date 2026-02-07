@@ -10,8 +10,8 @@ local Service = {
     cachedModules = {}
 }
 
-function Service.dataLoaded(player: Player)
-
+function Service.DataLoaded(player: Player)
+    ـ
 end
 function Service.giveMoney(target: Player, amount: number)
 
