@@ -1,25 +1,27 @@
 -- Button TPs
 
-local players = game:GetService("Players")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
 
-local player = players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local rootPart: BasePart = character:WaitForChild("HumanoidRootPart", math.huge)
+local playerGui = player:WaitForChild("PlayerGui")
 
 local gui = script.Parent
+local root = gui:WaitForChild("Root", 5)
+if not root then return end  -- لو Root مش موجود بعد 5 ثواني، يوقف السكريبت
 
-local root = gui:WaitForChild("Root", math.huge)
-local gardenTPFrame = root.GardenTp
-local seedsTPFrame = root.SeedsTP
-local sellTPFrame = root.SellTP
+local gardenTPFrame = root:WaitForChild("GardenTP", 5)
+if not gardenTPFrame then return end
 
 repeat task.wait() until player:GetAttribute("DataLoaded") == true
 
+local character = player.Character or player.CharacterAdded:Wait()
+local rootPart: BasePart = character:WaitForChild("HumanoidRootPart")
+
 gardenTPFrame.Button.MouseButton1Click:Connect(function()
-    for _, plot: Model in workspace.World.Map.Plots:GetChildren() do
+    for _, plot: Model in ipairs(workspace.World.Map.Plots:GetChildren()) do
         if plot:GetAttribute("Taken") == true and plot:GetAttribute("Owner") == player.UserId then
-            -- teleport here
-            character:SetPrimaryPartCFrame(plot.TPPart.CFrame)
+            local tpPart: BasePart = plot:WaitForChild("TPpart")
+            rootPart.CFrame = tpPart.CFrame
             return
         end
     end
