@@ -19,8 +19,7 @@ gardenTPFrame.Button.MouseButton1Click:Connect(function()
     for _, plot: Model in workspace.World.Map.Plots:GetChildren() do
         if plot:GetAttribute("Taken") == true and plot:GetAttribute("Owner") == player.UserId then
             -- teleport here
-            character:SetPrimaryPartCFrame(plot.TPPart.CFrame)
-            return
+            character:SetPrimaryPartCFrame(plot.TPpart.CFrame)
         end
     end
 end)
