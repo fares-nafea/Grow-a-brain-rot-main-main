@@ -1,25 +1,41 @@
--- Button TPs
-
 local Players = game:GetService("Players")
-
 local player = Players.LocalPlayer
+
 local character = player.Character or player.CharacterAdded:Wait()
-local rootPart: BasePart = character:WaitForChild("HumanoidRootPart")
+local rootPart: BasePart = character:WaitForChild("HumanoidRootPart", math.huge)
 
-local gui = script.Parent
+local gardenTPFrame = player:WaitForChild("PlayerGui")
+    :WaitForChild("MainGui")
+    :WaitForChild("Root")
+    :WaitForChild("GardenTP")
+    :WaitForChild("Button")
 
-local root = gui:WaitForChild("Root", math.huge)
-local gardenTPFrame = root:WaitForChild("GardenTP")
-local seedsTPFrame = root:WaitForChild("SeedsTP")
-local sellTPFrame = root:WaitForChild("SellTP")
+local SellTPFrame = player:WaitForChild("PlayerGui")
+    :WaitForChild("MainGui")
+    :WaitForChild("Root")
+    :WaitForChild("SellTP")
+    :WaitForChild("Button")
 
-repeat task.wait() until player:GetAttribute("DataLoaded") == true
+local SeedsTPFrame = player:WaitForChild("PlayerGui")
+    :WaitForChild("MainGui")
+    :WaitForChild("Root")
+    :WaitForChild("SeedsTP")
+    :WaitForChild("Button")
 
-gardenTPFrame.Button.MouseButton1Click:Connect(function()
-    for _, plot: Model in workspace.World.Map.Plots:GetChildren() do
+gardenTPFrame.MouseButton1Click:Connect(function()
+    for _, plot: Model in pairs(workspace.World.Map.Plots:GetChildren()) do
         if plot:GetAttribute("Taken") == true and plot:GetAttribute("Owner") == player.UserId then
+            local TPpart = plot:WaitForChild("TPpart")
             -- teleport here
-            character:SetPrimaryPartCFrame(plot.TPpart.CFrame)
+            character:SetPrimaryPartCFrame(TPpart.CFrame)
         end
     end
+end)
+
+SellTPFrame.MouseButton1Click:Connect(function()
+    character:SetPrimaryPartCFrame(workspace.World.Map.Stands.SellStuff.TPpart.CFrame)
+end)
+
+SeedsTPFrame.MouseButton1Click:Connect(function()
+    character:SetPrimaryPartCFrame(workspace.World.Map.Stands.SeedShop.TPpart.CFrame)
 end)

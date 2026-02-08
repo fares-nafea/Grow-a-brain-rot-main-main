@@ -8,7 +8,7 @@ local World = workspace:WaitForChild("World")
 local Map = World:WaitForChild("Map")
 local Plots = Map:WaitForChild("Plots")
 
-function Service.getPlots()
+function Service.getMaxPlots()
     return Plots:GetChildren()
 end
 function Service.getPlot(player: Player)
@@ -20,7 +20,7 @@ function Service.getPlot(player: Player)
     return nil
 end
 function Service.getAvailablePlot(player: Player)
-    for _, plot: Model in ipairs(Service.getPlots()) do
+    for _, plot: Model in ipairs(Service.getMaxPlots()) do
         if plot:GetAttribute("Taken") then
             continue
         end
@@ -37,7 +37,7 @@ function Service.dataLoaded(player: Player)
         local playerSign: Model = plot.PlayerSign
         playerSign.Main.SurfaceGui.TextLabel.Text = player.Name
         
-        local ImageSize = Enum.ThumbnailSize.Size420x420
+        local ImageSize = Enum.ThumbnailSize.Size60x60
         local ImageType = Enum.ThumbnailType.HeadShot
         local content = players:GetUserThumbnailAsync(player.UserId, ImageType, ImageSize)
         playerSign.Main.SurfaceGui.ImageLabel.ImageTransparency = 0
