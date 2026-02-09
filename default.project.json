@@ -8,14 +8,56 @@
         "$className": "Folder"
       }
     },
+
     "StarterGui": {
-      "shecklesUpdater": {
-        "$path": "src/client/shecklesUpdater.client.lua"
-      },
-      "buttonTPs": {
-        "$path": "src/client/buttonTPs.client.lua"
+      "MainGui": {
+        "$className": "ScreenGui",
+
+        "Root": {
+          "$className": "Frame",
+
+          "Frames": {
+            "$className": "Frame",
+
+            "SeedsFrame": {
+              "$className": "Frame",
+
+              "BuySeedButton": {
+                "$className": "TextButton"
+              }
+            }
+          },
+
+          "GardenTP": {
+            "$className": "Frame"
+          },
+
+          "SeedsTP": {
+            "$className": "Frame"
+          },
+
+          "SellTP": {
+            "$className": "Frame"
+          },
+
+          "Sheckles": {
+            "$className": "TextLabel"
+          }
+        }
       }
     },
+
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "shecklesUpdater": {
+          "$path": "src/client/shecklesUpdater.client.lua"
+        },
+        "buttonTPs": {
+          "$path": "src/client/buttonTPs.client.lua"
+        }
+      }
+    },
+
     "ServerScriptService": {
       "Server": {
         "$path": "src/server/Server.server.lua"
@@ -30,6 +72,7 @@
           "ProfileStore": {
             "$path": "src/server/services/ProfileStore.lua"
           },
+
           "Template": {
             "$path": "src/server/services/Template.lua"
           }
@@ -38,6 +81,7 @@
         "MoneyService": {
           "$path": "src/server/services/MoneyService.lua"
         },
+
         "PlotService": {
           "$path": "src/server/services/PlotService.lua"
         }
