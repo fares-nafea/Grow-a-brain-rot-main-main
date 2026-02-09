@@ -4,17 +4,23 @@
     "$className": "DataModel",
 
     "ReplicatedStorage": {
-      "Remotes": {
-        "$className": "Folder"
+      "Events": {
+        "$className": "Folder",
+        "ToggleSeedFrame": {
+          "$className": "RemoteEvent"
+        }
       }
     },
 
     "StarterGui": {
+      "buttonTPs": {
+        "$path": "src/client/buttonTPs.client.lua"
+      },
       "shecklesUpdater": {
         "$path": "src/client/shecklesUpdater.client.lua"
       },
-      "buttonTPs": {
-        "$path": "src/client/buttonTPs.client.lua"
+      "seedFrameHandler": {
+        "$path": "src/client/seedFrameHandler.client.lua"
       }
     },
 
@@ -30,13 +36,10 @@
       "Server": {
         "$path": "src/server/Server.server.lua"
       },
-
       "Services": {
         "$className": "Folder",
-
         "DataService": {
           "$path": "src/server/services/DataService.lua",
-
           "ProfileStore": {
             "$path": "src/server/services/ProfileStore.lua"
           },
@@ -44,7 +47,6 @@
             "$path": "src/server/services/Template.lua"
           }
         },
-
         "MoneyService": {
           "$path": "src/server/services/MoneyService.lua"
         },
