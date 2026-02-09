@@ -8,6 +8,7 @@
         "$className": "Folder"
       }
     },
+
     "StarterGui": {
       "shecklesUpdater": {
         "$path": "src/client/shecklesUpdater.client.lua"
@@ -16,6 +17,15 @@
         "$path": "src/client/buttonTPs.client.lua"
       }
     },
+
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "PromptClient": {
+          "$path": "src/client/PromptClient.client.lua"
+        }
+      }
+    },
+
     "ServerScriptService": {
       "Server": {
         "$path": "src/server/Server.server.lua"
