@@ -10,6 +10,18 @@
       }
     },
 
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+
+        "PromptClient": {
+          "$path": "src/client/PromptClient.client.lua"
+        }
+      }
+    },
+
     "StarterGui": {
       "$className": "StarterGui",
 
@@ -17,7 +29,10 @@
         "$className": "ScreenGui",
 
         "Events": {
-          "$className": "Folder"
+          "$className": "Folder",
+          "ToggleSeedFrame": {
+            "$className": "BindableEvent"
+          }
         },
 
         "Root": {
@@ -41,32 +56,20 @@
 
           "GardenTP": {
             "$className": "Frame",
-            "Button": {
-              "$className": "TextButton"
-            },
-            "Image": {
-              "$className": "ImageLabel"
-            }
+            "Button": { "$className": "TextButton" },
+            "Image": { "$className": "ImageLabel" }
           },
 
           "SeedsTP": {
             "$className": "Frame",
-            "Button": {
-              "$className": "TextButton"
-            },
-            "Image": {
-              "$className": "ImageLabel"
-            }
+            "Button": { "$className": "TextButton" },
+            "Image": { "$className": "ImageLabel" }
           },
 
           "SellTP": {
             "$className": "Frame",
-            "Button": {
-              "$className": "TextButton"
-            },
-            "Image": {
-              "$className": "ImageLabel"
-            }
+            "Button": { "$className": "TextButton" },
+            "Image": { "$className": "ImageLabel" }
           },
 
           "Sheckles": {
@@ -84,6 +87,12 @@
 
         "shecklesUpdater": {
           "$path": "src/client/shecklesUpdater.client.lua"
+        },
+
+        "Configuration": {
+          "$className": "Folder",
+          "seedFrameDebounce":{"$className": "BoolValue"},
+          "seedFrameToggled":{"$className": "BoolValue"}
         }
       }
     },
@@ -104,6 +113,7 @@
           "ProfileStore": {
             "$path": "src/server/services/ProfileStore.lua"
           },
+
           "Template": {
             "$path": "src/server/services/Template.lua"
           }
@@ -112,6 +122,7 @@
         "MoneyService": {
           "$path": "src/server/services/MoneyService.lua"
         },
+
         "PlotService": {
           "$path": "src/server/services/PlotService.lua"
         }
