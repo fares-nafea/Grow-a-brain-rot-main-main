@@ -44,12 +44,8 @@
             "SeedFrame": {
               "$className": "Frame",
 
-              "SeedImage": {
+              "FrameImage": {
                 "$className": "ImageLabel"
-              },
-
-              "SeedButton": {
-                "$className": "TextButton"
               }
             }
           },
