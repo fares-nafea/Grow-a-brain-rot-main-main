@@ -4,14 +4,21 @@
     "$className": "DataModel",
 
     "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
       "Remotes": {
         "$className": "Folder"
       }
     },
 
     "StarterGui": {
+      "$className": "StarterGui",
+
       "MainGui": {
         "$className": "ScreenGui",
+
+        "Events": {
+          "$className": "Folder"
+        },
 
         "Root": {
           "$className": "Frame",
@@ -19,46 +26,62 @@
           "Frames": {
             "$className": "Frame",
 
-            "SeedsFrame": {
+            "SeedFrame": {
               "$className": "Frame",
 
-              "BuySeedButton": {
+              "SeedImage": {
+                "$className": "ImageLabel"
+              },
+
+              "SeedButton": {
                 "$className": "TextButton"
               }
             }
           },
 
           "GardenTP": {
-            "$className": "Frame"
+            "$className": "Frame",
+            "Button": {
+              "$className": "TextButton"
+            }
           },
 
           "SeedsTP": {
-            "$className": "Frame"
+            "$className": "Frame",
+            "Button": {
+              "$className": "TextButton"
+            }
           },
 
           "SellTP": {
-            "$className": "Frame"
+            "$className": "Frame",
+            "Button": {
+              "$className": "TextButton"
+            }
           },
 
           "Sheckles": {
             "$className": "TextLabel"
           }
-        }
-      }
-    },
-
-    "StarterPlayer": {
-      "StarterPlayerScripts": {
-        "shecklesUpdater": {
-          "$path": "src/client/shecklesUpdater.client.lua"
         },
+
+        "seedFrameHandler": {
+          "$path": "src/client/seedFrameHandler.client.lua"
+        },
+
         "buttonTPs": {
           "$path": "src/client/buttonTPs.client.lua"
+        },
+
+        "shecklesUpdater": {
+          "$path": "src/client/shecklesUpdater.client.lua"
         }
       }
     },
 
     "ServerScriptService": {
+      "$className": "ServerScriptService",
+
       "Server": {
         "$path": "src/server/Server.server.lua"
       },
@@ -72,7 +95,6 @@
           "ProfileStore": {
             "$path": "src/server/services/ProfileStore.lua"
           },
-
           "Template": {
             "$path": "src/server/services/Template.lua"
           }
@@ -81,7 +103,6 @@
         "MoneyService": {
           "$path": "src/server/services/MoneyService.lua"
         },
-
         "PlotService": {
           "$path": "src/server/services/PlotService.lua"
         }
