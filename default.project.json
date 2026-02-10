@@ -43,6 +43,9 @@
             "$className": "Frame",
             "Button": {
               "$className": "TextButton"
+            },
+            "Image": {
+              "$className": "ImageLabel"
             }
           },
 
@@ -50,6 +53,9 @@
             "$className": "Frame",
             "Button": {
               "$className": "TextButton"
+            },
+            "Image": {
+              "$className": "ImageLabel"
             }
           },
 
@@ -57,6 +63,9 @@
             "$className": "Frame",
             "Button": {
               "$className": "TextButton"
+            },
+            "Image": {
+              "$className": "ImageLabel"
             }
           },
 
