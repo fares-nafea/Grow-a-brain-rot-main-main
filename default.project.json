@@ -46,6 +46,21 @@
 
               "FrameImage": {
                 "$className": "ImageLabel"
+              },
+              "Restock": {
+                "$className": "Frame",
+                "RestockButton": {
+                  "$className": "TextButton"
+                }
+              },
+              "TitleFrame": {
+                "$className": "Frame",
+                "Title": {
+                  "$className": "TextButton"
+                }
+              },
+              "List": {
+                "$className": "ScrollingFrame"
               }
             }
           },
