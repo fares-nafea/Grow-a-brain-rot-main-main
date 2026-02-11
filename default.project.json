@@ -3,6 +3,17 @@
   "tree": {
     "$className": "DataModel",
 
+    "Workspace": {
+      "$className": "Workspace",
+
+      "noob seed": {
+        "$className": "Tool",
+        "Handle": {
+          "$className": "Part"
+        }
+      }
+    },
+
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
       "Remotes": {
