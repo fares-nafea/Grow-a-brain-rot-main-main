@@ -18,6 +18,9 @@
 
         "PromptClient": {
           "$path": "src/client/PromptClient.client.lua"
+        },
+        "ResetDisable": {
+          "$path": "src/client/ResetDisable.client.lua"
         }
       }
     },
