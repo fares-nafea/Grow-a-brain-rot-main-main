@@ -1,19 +1,18 @@
 -- PromptClient
 
 local Players = game:GetService("Players")
-local proximityPromptService = game:GetService("ProximityPromptService")
+local ProximityPromptService = game:GetService("ProximityPromptService")
 
 local localPlayer = Players.LocalPlayer
-local playerGui: PlayerGui = localPlayer:WaitForChild("PlayerGui", math.huge)
+local playerGui = localPlayer:WaitForChild("PlayerGui")
 
-local mainGui = playerGui:WaitForChild("MainGui")
+local mainGui = playerGui:WaitForChild("MainGui", 10)
+
+
 local eventsFolder = mainGui:WaitForChild("Events")
 
-proximityPromptService.PromptTriggered:Connect(function(prompt: ProximityPrompt)
+ProximityPromptService.PromptTriggered:Connect(function(prompt: ProximityPrompt)
     if prompt.Name == "SeedShopPrompt" then
         eventsFolder.ToggleSeedFrame:Fire(true)
-    end
-    if prompt.Name == "SellPrompt" then
-
     end
 end)
