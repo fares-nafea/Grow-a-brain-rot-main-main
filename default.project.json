@@ -47,20 +47,56 @@
               "FrameImage": {
                 "$className": "ImageLabel"
               },
+              "Exit": {
+              "$className": "TextButton",
+              "FrameImage": {
+                "$className": "ImageLabel"
+              }
+              },
               "Restock": {
                 "$className": "Frame",
                 "RestockButton": {
                   "$className": "TextButton"
+                },
+                "Image": {
+                  "$className": "ImageLabel"
                 }
               },
               "TitleFrame": {
-                "$className": "Frame",
-                "Title": {
-                  "$className": "TextButton"
-                }
+                "$className": "Frame"
               },
               "List": {
-                "$className": "ScrollingFrame"
+                "$className": "ScrollingFrame",
+                "Template": {
+                  "$className": "Frame",
+                  "Frame": {
+                    "$className": "ImageLabel"
+                  },
+                  "Title": {
+                    "$className": "TextLabel"
+                  },
+                  "stock": {
+                    "$className": "TextLabel"
+                  },
+                  "price": {
+                    "$className": "TextLabel"
+                  },
+                  "Frame2": {
+                    "$className": "ImageLabel"
+                  },
+                  "Buy": {
+                    "$className": "ImageLabel",
+                    "Text": {
+                    "$className": "TextLabel"
+                   }
+                  },
+                  "Tier": {
+                    "$className": "ImageLabel",
+                    "Text": {
+                    "$className": "TextLabel"
+                   }
+                  }
+                }
               }
             }
           },
