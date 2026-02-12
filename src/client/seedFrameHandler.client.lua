@@ -1,21 +1,50 @@
 -- seedFrameHandler
 
+local replicatedStorage = game:GetService("ReplicatedStorage")
 local lighting = game:GetService("Lighting")
 local tweenService = game:GetService("TweenService")
+
+local modules = replicatedStorage:WaitForChild("Modules")
+local seedDataModule = require(modules.SeedData)
 
 local mainGui = script.Parent
 
 local eventsFolder = mainGui:WaitForChild("Events")
 local root = mainGui:WaitForChild("Root")
-local configurationFolder = mainGui:WaitForChild("Configuration")
 
 local seedsFrame = root:WaitForChild("Frames"):WaitForChild("SeedFrame")
+local configurationFolder = mainGui:WaitForChild("Configuration")
 
 -- Default
 seedsFrame.Visible = false
 seedsFrame.Size = UDim2.new(0.3,0,0,0)
------------
+----------- Scripting Seed List
+local listFrame = seedsFrame.List
 
+local function updateList()
+    for _, v in listFrame:GetChildren() do
+        if v:IsA("Frame") then
+            v:Destroy()
+        end
+    end
+    local seedOrder = seedDataModule.getSeedOrder()
+    for _, seedName: string in seedOrder do
+        local correspondingData = seedDataModule.getData(seedName)
+        if correspondingData then
+            local clone = script.Template:clone()
+            clone.Name = seedName
+            clone.Cost.Text = correspondingData.Cost.."$"
+            clone.Title.Text = correspondingData.DisplayName
+            clone.StockCount.Text = "X"..correspondingData.ServerData.CurrentStock.."in Stock"
+            clone.Parent = listFrame
+        else
+            continue
+        end
+    end
+end
+
+updateList()
+-------
 
 eventsFolder:WaitForChild("ToggleSeedFrame").Event:Connect(function(bool: boolean)
 

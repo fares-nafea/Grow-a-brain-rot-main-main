@@ -116,15 +116,15 @@
                     "$className": "TextLabel"
                   },
 
-                  "stock": {
+                  "StockCount": {
                     "$className": "TextLabel"
                   },
 
-                  "price": {
+                  "Cost": {
                     "$className": "TextLabel"
                   },
 
-                  "Frame2": {
+                  "SeedIcon": {
                     "$className": "ImageLabel"
                   },
 
@@ -170,7 +170,44 @@
         },
 
         "seedFrameHandler": {
-          "$path": "src/client/seedFrameHandler.client.lua"
+          "$path": "src/client/seedFrameHandler.client.lua",
+          "Template": {
+                  "$className": "Frame",
+
+                  "Frame": {
+                    "$className": "ImageLabel"
+                  },
+
+                  "Title": {
+                    "$className": "TextLabel"
+                  },
+
+                  "StockCount": {
+                    "$className": "TextLabel"
+                  },
+
+                  "Cost": {
+                    "$className": "TextLabel"
+                  },
+
+                  "SeedIcon": {
+                    "$className": "ImageLabel"
+                  },
+
+                  "Buy": {
+                    "$className": "ImageLabel",
+                    "Text": {
+                      "$className": "TextLabel"
+                    }
+                  },
+
+                  "Tier": {
+                    "$className": "ImageLabel",
+                    "Text": {
+                      "$className": "TextLabel"
+                    }
+                  }
+                }
         },
 
         "buttonTPs": {
