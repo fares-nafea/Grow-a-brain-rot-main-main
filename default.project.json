@@ -4,20 +4,24 @@
     "$className": "DataModel",
 
     "Workspace": {
-      "$className": "Workspace",
-
-      "noob seed": {
-        "$className": "Tool",
-        "Handle": {
-          "$className": "Part"
-        }
-      }
+      "$className": "Workspace"
     },
 
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
+
       "Remotes": {
         "$className": "Folder"
+      },
+
+      "Modules": {
+        "$className": "Folder",
+        "SeedData": {
+          "$path": "src/server/SeedData.lua",
+          "Carrot Seed": {
+            "$path": "src/server/Carrot Seed.lua"
+          }
+        }
       }
     },
 
@@ -32,6 +36,21 @@
         },
         "ResetDisable": {
           "$path": "src/client/ResetDisable.client.lua"
+        }
+      }
+    },
+
+    "ServerStorage": {
+      "$className": "ServerStorage",
+
+      "Seeds": {
+        "$className": "Folder",
+
+        "Carrot Seed": {
+          "$className": "Tool",
+          "Handle": {
+            "$className": "Part"
+          }
         }
       }
     },
@@ -61,12 +80,14 @@
               "FrameImage": {
                 "$className": "ImageLabel"
               },
+
               "Exit": {
-              "$className": "TextButton",
-              "FrameImage": {
-                "$className": "ImageLabel"
-              }
+                "$className": "TextButton",
+                "FrameImage": {
+                  "$className": "ImageLabel"
+                }
               },
+
               "Restock": {
                 "$className": "Frame",
                 "RestockButton": {
@@ -76,39 +97,49 @@
                   "$className": "ImageLabel"
                 }
               },
+
               "TitleFrame": {
                 "$className": "Frame"
               },
+
               "List": {
                 "$className": "ScrollingFrame",
+
                 "Template": {
                   "$className": "Frame",
+
                   "Frame": {
                     "$className": "ImageLabel"
                   },
+
                   "Title": {
                     "$className": "TextLabel"
                   },
+
                   "stock": {
                     "$className": "TextLabel"
                   },
+
                   "price": {
                     "$className": "TextLabel"
                   },
+
                   "Frame2": {
                     "$className": "ImageLabel"
                   },
+
                   "Buy": {
                     "$className": "ImageLabel",
                     "Text": {
-                    "$className": "TextLabel"
-                   }
+                      "$className": "TextLabel"
+                    }
                   },
+
                   "Tier": {
                     "$className": "ImageLabel",
                     "Text": {
-                    "$className": "TextLabel"
-                   }
+                      "$className": "TextLabel"
+                    }
                   }
                 }
               }
@@ -152,8 +183,12 @@
 
         "Configuration": {
           "$className": "Folder",
-          "seedFrameDebounce":{"$className": "BoolValue"},
-          "seedFrameToggled":{"$className": "BoolValue"}
+          "seedFrameDebounce": {
+            "$className": "BoolValue"
+          },
+          "seedFrameToggled": {
+            "$className": "BoolValue"
+          }
         }
       }
     },
