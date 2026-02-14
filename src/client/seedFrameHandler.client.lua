@@ -19,7 +19,7 @@ local configurationFolder = mainGui:WaitForChild("Configuration")
 seedsFrame.Visible = false
 seedsFrame.Size = UDim2.new(0.3,0,0,0)
 ----------- Scripting Seed List
-local listFrame = seedsFrame.List
+local listFrame = seedsFrame:WaitForChild("List")
 
 local function updateList()
     for _, v in listFrame:GetChildren() do
