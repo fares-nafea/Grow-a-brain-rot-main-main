@@ -31,11 +31,11 @@ local function updateList()
     for _, seedName: string in seedOrder do
         local correspondingData = seedDataModule.getData(seedName)
         if correspondingData then
-            local clone = script.Template:clone()
+            local clone = script.Template:Clone()
             clone.Name = seedName
             clone.Cost.Text = correspondingData.Cost.."$"
             clone.Title.Text = correspondingData.DisplayName
-            clone.StockCount.Text = "X"..correspondingData.ServerData.CurrentStock.."in Stock"
+            clone.StockCount.Text = "X"..correspondingData.ServerData.CurrentStock.." in Stock"
             clone.Parent = listFrame
         else
             continue
@@ -81,7 +81,7 @@ eventsFolder:WaitForChild("ToggleSeedFrame").Event:Connect(function(bool: boolea
             tweenService:Create(foundBlur,TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
                 Size = 0
             }):Play()
-            task.wait(0.1, function()
+            task.delay(0.5, function()
                 foundBlur:Destroy()
             end)
         end
