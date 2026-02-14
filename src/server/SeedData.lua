@@ -7,8 +7,8 @@ local SeedData = {
     }
 }
 
-for _,  moduleScript: ModuleScript in script:GetChildren() do
-    if moduleScript:IsA("ModuleScript") then
+for _, moduleScript in script.Parent:GetChildren() do
+    if moduleScript:IsA("ModuleScript") and moduleScript ~= script then
         SeedData.cachedModules[moduleScript.Name] = require(moduleScript)
     end
 end

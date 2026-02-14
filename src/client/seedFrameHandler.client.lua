@@ -31,14 +31,13 @@ local function updateList()
     for _, seedName: string in seedOrder do
         local correspondingData = seedDataModule.getData(seedName)
         if correspondingData then
-            local clone = script.Template:Clone()
+            local clone = script:WaitForChild("Template"):Clone()
+            clone.Visible = true
             clone.Name = seedName
             clone.Cost.Text = correspondingData.Cost.."$"
             clone.Title.Text = correspondingData.DisplayName
             clone.StockCount.Text = "X"..correspondingData.ServerData.CurrentStock.." in Stock"
             clone.Parent = listFrame
-        else
-            continue
         end
     end
 end
