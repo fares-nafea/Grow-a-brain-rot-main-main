@@ -27,10 +27,8 @@
 
     "StarterPlayer": {
       "$className": "StarterPlayer",
-
       "StarterPlayerScripts": {
         "$className": "StarterPlayerScripts",
-
         "PromptClient": {
           "$path": "src/client/PromptClient.client.lua"
         },
@@ -42,10 +40,8 @@
 
     "ServerStorage": {
       "$className": "ServerStorage",
-
       "Seeds": {
         "$className": "Folder",
-
         "Carrot Seed": {
           "$className": "Tool",
           "Handle": {
@@ -104,42 +100,16 @@
 
               "List": {
                 "$className": "ScrollingFrame",
-
                 "Template": {
                   "$className": "Frame",
-
-                  "Frame": {
-                    "$className": "ImageLabel"
-                  },
-
-                  "Title": {
-                    "$className": "TextLabel"
-                  },
-
-                  "StockCount": {
-                    "$className": "TextLabel"
-                  },
-
-                  "Cost": {
-                    "$className": "TextLabel"
-                  },
-
-                  "SeedIcon": {
-                    "$className": "ImageLabel"
-                  },
-
-                  "Buy": {
-                    "$className": "ImageLabel",
-                    "Text": {
-                      "$className": "TextLabel"
-                    }
-                  },
-
-                  "Tier": {
-                    "$className": "ImageLabel",
-                    "Text": {
-                      "$className": "TextLabel"
-                    }
+                  "Frame": { "$className": "ImageLabel" },
+                  "Title": { "$className": "TextLabel" },
+                  "StockCount": { "$className": "TextLabel" },
+                  "Cost": { "$className": "TextLabel" },
+                  "SeedIcon": { "$className": "ImageLabel" },
+                  "BuyButton": {
+                    "$className": "TextButton",
+                    "Buy": { "$className": "ImageLabel" }
                   }
                 }
               }
@@ -170,44 +140,7 @@
         },
 
         "seedFrameHandler": {
-          "$path": "src/client/seedFrameHandler.client.lua",
-          "Template": {
-                  "$className": "Frame",
-
-                  "Frame": {
-                    "$className": "ImageLabel"
-                  },
-
-                  "Title": {
-                    "$className": "TextLabel"
-                  },
-
-                  "StockCount": {
-                    "$className": "TextLabel"
-                  },
-
-                  "Cost": {
-                    "$className": "TextLabel"
-                  },
-
-                  "SeedIcon": {
-                    "$className": "ImageLabel"
-                  },
-
-                  "Buy": {
-                    "$className": "ImageLabel",
-                    "Text": {
-                      "$className": "TextLabel"
-                    }
-                  },
-
-                  "Tier": {
-                    "$className": "ImageLabel",
-                    "Text": {
-                      "$className": "TextLabel"
-                    }
-                  }
-                }
+          "$path": "src/client/seedFrameHandler.client.lua"
         },
 
         "buttonTPs": {
@@ -242,15 +175,22 @@
 
         "DataService": {
           "$path": "src/server/services/DataService.lua",
-
           "ProfileStore": {
             "$path": "src/server/services/ProfileStore.lua"
           },
-
           "Template": {
-            "$path": "src/server/services/Template.lua"
-          }
-        },
+                  "$className": "Frame",
+                  "Frame": { "$className": "ImageLabel" },
+                  "Title": { "$className": "TextLabel" },
+                  "StockCount": { "$className": "TextLabel" },
+                  "Cost": { "$className": "TextLabel" },
+                  "SeedIcon": { "$className": "ImageLabel" },
+                  "BuyButton": {
+                    "$className": "TextButton",
+                    "Buy": { "$className": "ImageLabel" }
+                  }
+                }
+          },
 
         "MoneyService": {
           "$path": "src/server/services/MoneyService.lua"
