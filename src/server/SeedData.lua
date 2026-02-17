@@ -1,30 +1,33 @@
 -- SeedData
 
 local SeedData = {
-    cachedModules = {},
-    seedOrder = {
-        "Carrot Seed",
-    }
+	cachedModules = {},
+	seedOrder = {
+		"Carrot Seed",
+		"Blueberry Seed",
+		"Tomato Seed",
+		"Cacao Seed",
+	}
 }
 
-for _, moduleScript in script.Parent:GetChildren() do
-    if moduleScript:IsA("ModuleScript") and moduleScript ~= script then
-        SeedData.cachedModules[moduleScript.Name] = require(moduleScript)
-    end
+function SeedData.getStockIncrement(seedName: string)
+	if seedName == "Carrot Seed" then
+		return math.random(1,5)
+	end
+	return 1
 end
-
 function SeedData.getStockCount(seedName: string)
-    local data = SeedData.getData(seedName)
-    if data then
-        return data.ServerData.CurrentStock
-    end
-    return nil
+	local data = SeedData.getData(seedName)
+	if data then
+		return data.Server.CurrentStock.Value
+	end
+	return nil
 end
 function SeedData.getSeedOrder()
-    return SeedData.seedOrder
+	return SeedData.seedOrder
 end
 function SeedData.getData(seedName: string)
-    return SeedData.cachedModules[seedName] or nil
+	return script:FindFirstChild(seedName) or nil
 end
 
 return SeedData

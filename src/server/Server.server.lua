@@ -11,11 +11,14 @@ for _, moduleScript: ModuleScript in servicesFolder:GetChildren() do
 		cachedModules[moduleScript.Name] = require(moduleScript)
 	end
 end
+
+local requiredModule = require(script.CachedModules)
+requiredModule.Cache = cachedModules
+
 for moduleName: string, moduleScript in cachedModules do
-	moduleScript.cachedModules = cachedModules
 	if moduleScript.init then
 		moduleScript.init()
 	end
 end
 
-warn("Game services loaded in "..os.clock()-startTime.."s")
+warn("Game services loaded in ".. os.clock()-startTime.."s")

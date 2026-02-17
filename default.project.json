@@ -16,22 +16,26 @@
 
       "Modules": {
         "$className": "Folder",
+
         "SeedData": {
           "$path": "src/server/SeedData.lua",
-          "Carrot Seed": {
-            "$path": "src/server/Carrot Seed.lua"
-          }
+          "CarrotSeed": {
+          "$path": "src/server/CarrotSeed.lua"
+        }
         }
       }
     },
 
     "StarterPlayer": {
       "$className": "StarterPlayer",
+
       "StarterPlayerScripts": {
         "$className": "StarterPlayerScripts",
+
         "PromptClient": {
           "$path": "src/client/PromptClient.client.lua"
         },
+
         "ResetDisable": {
           "$path": "src/client/ResetDisable.client.lua"
         }
@@ -40,10 +44,13 @@
 
     "ServerStorage": {
       "$className": "ServerStorage",
+
       "Seeds": {
         "$className": "Folder",
-        "Carrot Seed": {
+
+        "CarrotSeed": {
           "$className": "Tool",
+
           "Handle": {
             "$className": "Part"
           }
@@ -59,6 +66,7 @@
 
         "Events": {
           "$className": "Folder",
+
           "ToggleSeedFrame": {
             "$className": "BindableEvent"
           }
@@ -79,6 +87,7 @@
 
               "Exit": {
                 "$className": "TextButton",
+
                 "FrameImage": {
                   "$className": "ImageLabel"
                 }
@@ -86,9 +95,11 @@
 
               "Restock": {
                 "$className": "Frame",
+
                 "RestockButton": {
                   "$className": "TextButton"
                 },
+
                 "Image": {
                   "$className": "ImageLabel"
                 }
@@ -100,15 +111,19 @@
 
               "List": {
                 "$className": "ScrollingFrame",
+
                 "Template": {
                   "$className": "Frame",
+
                   "Frame": { "$className": "ImageLabel" },
                   "Title": { "$className": "TextLabel" },
                   "StockCount": { "$className": "TextLabel" },
                   "Cost": { "$className": "TextLabel" },
                   "SeedIcon": { "$className": "ImageLabel" },
+
                   "BuyButton": {
                     "$className": "TextButton",
+
                     "Buy": { "$className": "ImageLabel" }
                   }
                 }
@@ -153,9 +168,11 @@
 
         "Configuration": {
           "$className": "Folder",
+
           "seedFrameDebounce": {
             "$className": "BoolValue"
           },
+
           "seedFrameToggled": {
             "$className": "BoolValue"
           }
@@ -167,7 +184,11 @@
       "$className": "ServerScriptService",
 
       "Server": {
-        "$path": "src/server/Server.server.lua"
+        "$path": "src/server/Server.server.lua",
+
+        "CachedModules": {
+          "$path": "src/server/CachedModules.lua"
+        }
       },
 
       "Services": {
@@ -175,22 +196,11 @@
 
         "DataService": {
           "$path": "src/server/services/DataService.lua",
+
           "ProfileStore": {
             "$path": "src/server/services/ProfileStore.lua"
-          },
-          "Template": {
-                  "$className": "Frame",
-                  "Frame": { "$className": "ImageLabel" },
-                  "Title": { "$className": "TextLabel" },
-                  "StockCount": { "$className": "TextLabel" },
-                  "Cost": { "$className": "TextLabel" },
-                  "SeedIcon": { "$className": "ImageLabel" },
-                  "BuyButton": {
-                    "$className": "TextButton",
-                    "Buy": { "$className": "ImageLabel" }
-                  }
-                }
-          },
+          }
+        },
 
         "MoneyService": {
           "$path": "src/server/services/MoneyService.lua"
