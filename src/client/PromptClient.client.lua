@@ -9,7 +9,7 @@ local playerGui = localPlayer:WaitForChild("PlayerGui")
 local mainGui = playerGui:WaitForChild("MainGui", 10)
 
 
-local eventsFolder = mainGui:WaitForChild("Events")
+local eventsFolder = mainGui:WaitForChild("Events", 10)
 
 ProximityPromptService.PromptTriggered:Connect(function(prompt: ProximityPrompt)
     if prompt.Name == "SeedShopPrompt" then
