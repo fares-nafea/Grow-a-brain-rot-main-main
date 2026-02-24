@@ -8,6 +8,15 @@ local Service = {
     DEFAULT_RESTOCK_TIME = 10,
 }
 
+function Service.restockSeed(data: any)
+    if data then
+        if data.resetTimer then
+            -- Reset Timer
+            serverInfo.SEED_RESTOCK_TIMER.Value = Service.DEFAULT_RESTOCK_TIME
+        end
+    end
+    -- Restocking
+end
 function Service.init()
     -- Restocking Timer
     serverInfo.SEED_RESTOCK_TIMER.Value = Service.DEFAULT_RESTOCK_TIME
@@ -16,9 +25,9 @@ function Service.init()
             if serverInfo.SEED_RESTOCK_TIMER.Value <= 0 then
                 -- Restock Seeds
 
-                print("Restock Seeds")
+                Service.restockSeed()
 
-                
+
                 -- Reset Timer
                 serverInfo.SEED_RESTOCK_TIMER.Value = Service.DEFAULT_RESTOCK_TIME
             else
