@@ -38,7 +38,7 @@ local function updateList()
             clone.Name =  seedName
             clone.Cost.Text = correspondingData.Cost.."$"
             clone.Title.Text = correspondingData.DisplayName
-            clone.StockCount.Text = "X"..correspondingData.ServerData.StockCount.."Stock"
+            clone.StockCount.Text = "X"..correspondingData.ServerData.CurrentStock.."Stock"
             clone.Parent = listFrame
         else
             continue

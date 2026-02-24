@@ -16,7 +16,7 @@ end
 function SeedData.getStockCount(seedName: string)
     local data = SeedData.getData(seedName)
     if data then
-        return data.ServerData.StockCount
+        return data.ServerData.CurrentStock
     end
     return nil
 end
