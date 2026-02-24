@@ -9,6 +9,12 @@
 
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
+      "ServerInfo": {
+        "$className": "Folder",
+        "SEED_RESTOCK_TIMER": {
+          "$className": "IntValue"
+        }
+      },
 
       "Remotes": {
         "$className": "Folder",
@@ -263,7 +269,10 @@
 
         "PlotService": {
           "$path": "src/server/services/PlotService.lua"
-        }
+        },
+        "SeedService": {
+            "$path": "src/server/SeedService.lua"
+          }
       }
     }
   }

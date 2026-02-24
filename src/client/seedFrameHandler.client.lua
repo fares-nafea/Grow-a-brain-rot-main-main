@@ -4,6 +4,7 @@ local replicatedStorage = game:GetService("ReplicatedStorage")
 local lighting = game:GetService("Lighting")
 local tweenService = game:GetService("TweenService")
 
+local remotes = replicatedStorage:WaitForChild("Remotes")
 local modules = replicatedStorage:WaitForChild("Modules")
 local seedDataModule = require(modules.SeedData)
 
@@ -42,6 +43,7 @@ local function updateList()
             clone.SeedIcon.Image = correspondingData.Icon
 
             clone.Buy.Button.MouseButton1Click:Connect(function()
+                remotes.BuySeed:FireServer(seedName)
             end)
             clone.Parent = listFrame
         else
