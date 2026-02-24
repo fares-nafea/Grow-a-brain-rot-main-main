@@ -18,7 +18,8 @@ local configurationFolder = mainGui:WaitForChild("Configuration")
 -- Default
 seedsFrame.Visible = false
 seedsFrame.Size = UDim2.new(0.3,0,0,0)
------------ Scripting Seed List
+ --------- Scripting Seed List
+
 local listFrame = seedsFrame:WaitForChild("List")
 
 local function updateList()
@@ -27,15 +28,17 @@ local function updateList()
             v:Destroy()
         end
     end
-    local seedOrder = seedDataModule.getSeedOrder()
+
+    local seedOrder = seedDataModule:getSeedOrder()
     for _, seedName: string in seedOrder do
+
         local correspondingData = seedDataModule.getData(seedName)
         if correspondingData then
-            local clone = script.Template:Clone()
-            clone.Name = seedName
+            local clone = script.Template:clone()
+            clone.Name =  seedName
             clone.Cost.Text = correspondingData.Cost.."$"
             clone.Title.Text = correspondingData.DisplayName
-            clone.StockCount.Text = "X"..correspondingData.ServerData.CurrentStock.." in Stock"
+            clone.StockCount.Text = "X"..correspondingData.ServerData.StockCount.."Stock"
             clone.Parent = listFrame
         else
             continue
@@ -44,8 +47,7 @@ local function updateList()
 end
 
 updateList()
--------
-
+ -------------
 eventsFolder:WaitForChild("ToggleSeedFrame").Event:Connect(function(bool: boolean)
 
     if configurationFolder:WaitForChild("seedFrameDebounce").Value then return end
