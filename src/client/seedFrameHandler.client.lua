@@ -39,6 +39,10 @@ local function updateList()
             clone.Cost.Text = correspondingData.Cost.."$"
             clone.Title.Text = correspondingData.DisplayName
             clone.StockCount.Text = "X"..correspondingData.ServerData.CurrentStock.."Stock"
+            clone.SeedIcon.Image = correspondingData.Icon
+
+            clone.Buy.Button.MouseButton1Click:Connect(function()
+            end)
             clone.Parent = listFrame
         else
             continue

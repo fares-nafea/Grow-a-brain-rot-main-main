@@ -11,7 +11,10 @@
       "$className": "ReplicatedStorage",
 
       "Remotes": {
-        "$className": "Folder"
+        "$className": "Folder",
+        "BuySeed": {
+          "$className": "RemoteEvent"
+        }
       },
 
       "Modules": {
@@ -127,12 +130,14 @@
                   "SeedIcon": {
                     "$className": "ImageLabel"
                   },
-
-                  "BuyButton": {
+                  "Buy": {
+                    "$className": "Frame",
+                    "Button": {
                     "$className": "ImageButton",
                     "Text": {
                       "$className":"TextLabel"
                     }
+                  }
                   },
 
                   "Tier": {
