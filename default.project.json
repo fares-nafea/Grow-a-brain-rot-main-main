@@ -9,6 +9,7 @@
 
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
+
       "ServerInfo": {
         "$className": "Folder",
         "SEED_RESTOCK_TIMER": {
@@ -54,7 +55,6 @@
 
       "Seeds": {
         "$className": "Folder",
-
         "Carrot Seed": {
           "$className": "Tool",
           "Handle": {
@@ -139,14 +139,15 @@
                   "SeedIcon": {
                     "$className": "ImageLabel"
                   },
+
                   "Buy": {
                     "$className": "Frame",
                     "Button": {
-                    "$className": "ImageButton",
-                    "Text": {
-                      "$className":"TextLabel"
+                      "$className": "TextButton",
+                      "Image": {
+                        "$className": "ImageLabel"
+                      }
                     }
-                  }
                   },
 
                   "Tier": {
@@ -186,42 +187,42 @@
         "seedFrameHandler": {
           "$path": "src/client/seedFrameHandler.client.lua",
           "Template": {
-                  "$className": "Frame",
+            "$className": "Frame",
 
-                  "Frame": {
-                    "$className": "ImageLabel"
-                  },
+            "Frame": {
+              "$className": "ImageLabel"
+            },
 
-                  "Title": {
-                    "$className": "TextLabel"
-                  },
+            "Title": {
+              "$className": "TextLabel"
+            },
 
-                  "StockCount": {
-                    "$className": "TextLabel"
-                  },
+            "StockCount": {
+              "$className": "TextLabel"
+            },
 
-                  "Cost": {
-                    "$className": "TextLabel"
-                  },
+            "Cost": {
+              "$className": "TextLabel"
+            },
 
-                  "SeedIcon": {
-                    "$className": "ImageLabel"
-                  },
+            "SeedIcon": {
+              "$className": "ImageLabel"
+            },
 
-                  "Buy": {
-                    "$className": "ImageLabel",
-                    "Text": {
-                      "$className": "TextLabel"
-                    }
-                  },
+            "Buy": {
+              "$className": "ImageLabel",
+              "Text": {
+                "$className": "TextLabel"
+              }
+            },
 
-                  "Tier": {
-                    "$className": "ImageLabel",
-                    "Text": {
-                      "$className": "TextLabel"
-                    }
-                  }
-                }
+            "Tier": {
+              "$className": "ImageLabel",
+              "Text": {
+                "$className": "TextLabel"
+              }
+            }
+          }
         },
 
         "buttonTPs": {
@@ -273,9 +274,10 @@
         "PlotService": {
           "$path": "src/server/services/PlotService.lua"
         },
+
         "SeedService": {
-            "$path": "src/server/SeedService.lua"
-          }
+          "$path": "src/server/SeedService.lua"
+        }
       }
     }
   }

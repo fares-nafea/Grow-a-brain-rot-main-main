@@ -119,10 +119,13 @@ local function convertToHMS(Seconds)
     Seconds = Seconds - Minutes*60
     local Hours = (Minutes - Minutes%60)/60
     Minutes = Minutes - Hours*60
-    return Format(Hours)..":"..Format(Minutes)..":"..Format(Hours)
+    return Format(Hours)..":"..Format(Minutes)..":"..Format(Seconds)
 end
+
 local function updateRestockTimer()
-    seedsFrame.TitleFrame.SeedTimer.Text = "New seeds in: ".. convertToHMS(serverInfo.SEED_RESTOCK_TIMER.Value)
+    seedsFrame.TitleFrame:WaitForChild("SeedTimer").Text =
+        "New seeds in: ".. convertToHMS(serverInfo.SEED_RESTOCK_TIMER.Value)
 end
-serverInfo.SEED_RESTOCK_TIMER.Changed:Connect(function(updateRestockTimer)
+
+serverInfo.SEED_RESTOCK_TIMER.Changed:Connect(updateRestockTimer)
 updateRestockTimer()
