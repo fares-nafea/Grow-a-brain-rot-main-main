@@ -1,5 +1,6 @@
 -- seedFrameHandler
 
+local LogReporterService = game:GetService("LogReporterService")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local lighting = game:GetService("Lighting")
 local tweenService = game:GetService("TweenService")
@@ -10,6 +11,7 @@ local seedDataModule = require(modules.SeedData)
 
 local mainGui = script.Parent
 
+local serverInfo = replicatedStorage:WaitForChild("ServerInfo")
 local eventsFolder = mainGui:WaitForChild("Events")
 local root = mainGui:WaitForChild("Root")
 
@@ -106,3 +108,21 @@ end)
 seedsFrame:WaitForChild("Exit").MouseButton1Click:Connect(function()
     eventsFolder.ToggleSeedFrame:Fire(false)
 end)
+
+-- Update Restock Timer
+local function Format(Int)
+    return string.format("%02i", Int)
+end
+
+local function convertToHMS(Seconds)
+    local Minutes = (Seconds - Seconds%60)/60
+    Seconds = Seconds - Minutes*60
+    local Hours = (Minutes - Minutes%60)/60
+    Minutes = Minutes - Hours*60
+    return Format(Hours)..":"..Format(Minutes)..":"..Format(Hours)
+end
+local function updateRestockTimer()
+    seedsFrame.TitleFrame.SeedTimer.Text = "New seeds in: ".. convertToHMS(serverInfo.SEED_RESTOCK_TIMER.Value)
+end
+serverInfo.SEED_RESTOCK_TIMER.Changed:Connect(function(updateRestockTimer)
+updateRestockTimer()

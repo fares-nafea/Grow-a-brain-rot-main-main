@@ -108,7 +108,10 @@
               },
 
               "TitleFrame": {
-                "$className": "Frame"
+                "$className": "Frame",
+                "SeedTimer": {
+                  "$className": "TextButton"
+                }
               },
 
               "List": {
