@@ -8,15 +8,11 @@ local SeedData = {
     }
 }
 
-for _, moduleScript: ModuleScript in script:GetChildren()do
-    if moduleScript:IsA("ModuleScript") then
-        SeedData.cachedModules[moduleScript.Name] = require(moduleScript)
-    end
-end
+function SeedData.getStockIncrement()
 function SeedData.getStockCount(seedName: string)
     local data = SeedData.getData(seedName)
     if data then
-        return data.ServerData.CurrentStock
+        return data.Server.CurrentStock.Value
     end
     return nil
 end
@@ -24,9 +20,8 @@ function SeedData.getSeedOrder()
     return SeedData.seedOrder
 end
 function SeedData.getData(seedName: string)
-    return SeedData.cachedModules[seedName] or nil
+    return script.FindFirstChild(seedName) or nil
 end
-print(SeedData)
 
 return SeedData
 

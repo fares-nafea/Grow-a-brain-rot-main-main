@@ -39,10 +39,10 @@ local function updateList()
         if correspondingData then
             local clone = script.Template:clone()
             clone.Name =  seedName
-            clone.Cost.Text = correspondingData.Cost.."$"
-            clone.Title.Text = correspondingData.DisplayName
-            clone.StockCount.Text = "X"..correspondingData.ServerData.CurrentStock.."Stock"
-            clone.SeedIcon.Image = correspondingData.Icon
+            clone.Cost.Text = correspondingData.Cost.Value.."$"
+            clone.Title.Text = correspondingData.DisplayName.Value
+            clone.StockCount.Text = "X"..correspondingData.Server.CurrentStock.Value.."Stock"
+            clone.SeedIcon.Image = correspondingData.Icon.Value
 
             clone.Buy.Button.MouseButton1Click:Connect(function()
                 remotes.BuySeed:FireServer(seedName)
@@ -129,14 +129,3 @@ end
 
 serverInfo.SEED_RESTOCK_TIMER.Changed:Connect(updateRestockTimer)
 updateRestockTimer()
-
-while task.wait(1) do
-    for _, seedFrame: Frame in listFrame:GetChildren() do
-        if seedFrame:IsA("Frame") then
-            local Data = seedDataModule.getData(seedFrame.Name)
-            if Data then
-                seedFrame.StockCount.Text = "X"..Data.ServerData.CurrentStock.." Stock"
-            end
-        end
-    end
-end
