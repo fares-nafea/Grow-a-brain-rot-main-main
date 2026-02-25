@@ -1,6 +1,5 @@
 -- seedFrameHandler
 
-local LogReporterService = game:GetService("LogReporterService")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local lighting = game:GetService("Lighting")
 local tweenService = game:GetService("TweenService")
@@ -129,3 +128,22 @@ end
 
 serverInfo.SEED_RESTOCK_TIMER.Changed:Connect(updateRestockTimer)
 updateRestockTimer()
+
+-- Detecting Changes in Stock
+local function updateStockDisplay(seedName: string, currentCount: number)
+    local foundFrame = listFrame:FindFirstChild(seedName)
+    if foundFrame then
+        foundFrame.StockCount.Text = "x"..tostring(currentCount).." Stock"
+    end
+end
+
+for _, folder: Folder in modules.SeedData:GetChildren() do
+    local serverInfo = folder:FindFirstChild("Server")
+    if serverInfo then
+        serverInfo.CurrentStock.Changed:Connect(function()
+            updateStockDisplay(folder.Name, serverInfo.CurrentStock.Value)
+        end)
+        updateStockDisplay(folder.Name, serverInfo.CurrentStock.Value)
+    end
+end
+---

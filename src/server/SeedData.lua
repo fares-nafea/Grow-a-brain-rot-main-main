@@ -4,7 +4,6 @@ local SeedData = {
     cachedModules = {},
     seedOrder = {
         "Carrot Seed",
-        "Noob Seed",
     }
 }
 
