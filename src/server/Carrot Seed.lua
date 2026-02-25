@@ -5,5 +5,9 @@ return {
 
     ServerData = {
         CurrentStock = 10,
+        MaxStock = 15,
+        getRandomStock = function()
+            return math.random(1,3)
+        end,
     }
 }

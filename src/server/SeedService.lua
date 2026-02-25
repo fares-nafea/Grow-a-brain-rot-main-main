@@ -3,7 +3,11 @@
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local players = game:GetService("Players")
 
+local modules = replicatedStorage.Modules
 local serverInfo = replicatedStorage.ServerInfo
+
+local seedDataModules = require(modules.SeedData)
+
 local Service = {
     DEFAULT_RESTOCK_TIME = 10,
 }
@@ -16,6 +20,18 @@ function Service.restockSeed(data: any)
         end
     end
     -- Restocking
+    for _, seedName: string in seedDataModules.getSeedOrder() do
+        local seedData = seedDataModules.getData(seedName)
+        if seedData then
+            local countToAdd = seedData.getRandomStock()
+            seedData.ServerData.CurrentStock = math.clamp(
+                seedData.ServerData.CurrentStock*countToAdd,
+                0,
+                seedData.ServerData.MaxStock
+            )
+        end
+    end
+    ---
 end
 function Service.init()
     -- Restocking Timer

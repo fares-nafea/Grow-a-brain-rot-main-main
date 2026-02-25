@@ -129,3 +129,14 @@ end
 
 serverInfo.SEED_RESTOCK_TIMER.Changed:Connect(updateRestockTimer)
 updateRestockTimer()
+
+while task.wait(1) do
+    for _, seedFrame: Frame in listFrame:GetChildren() do
+        if seedFrame:IsA("Frame") then
+            local Data = seedDataModule.getData(seedFrame.Name)
+            if Data then
+                seedFrame.StockCount.Text = "X"..Data.ServerData.CurrentStock.." Stock"
+            end
+        end
+    end
+end
