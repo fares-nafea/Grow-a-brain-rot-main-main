@@ -31,7 +31,7 @@ local function updateList()
         end
     end
 
-    local seedOrder = seedDataModule:getSeedOrder()
+    local seedOrder = seedDataModule.getSeedOrder()
     for _, seedName: string in seedOrder do
 
         local correspondingData = seedDataModule.getData(seedName)
@@ -133,7 +133,7 @@ updateRestockTimer()
 local function updateStockDisplay(seedName: string, currentCount: number)
     local foundFrame = listFrame:FindFirstChild(seedName)
     if foundFrame then
-        foundFrame.StockCount.Text = "x"..tostring(currentCount).." Stock"
+        foundFrame.StockCount.Text = "X"..tostring(currentCount).." Stock"
     end
 end
 
