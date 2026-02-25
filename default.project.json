@@ -40,8 +40,14 @@
             "$className": "StringValue"
            }
           },
-          "Carrot Seed": {
-            "$path": "src/server/Carrot Seed.lua"
+          "Server": {
+            "$className": "Folder",
+            "CurrentStock": {
+            "$className": "IntValue"
+            },
+            "MaxStock": {
+            "$className": "IntValue"
+            }
           }
         }
       }
