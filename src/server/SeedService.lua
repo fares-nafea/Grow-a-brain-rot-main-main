@@ -23,11 +23,11 @@ function Service.restockSeed(data: any)
     for _, seedName: string in seedDataModules.getSeedOrder() do
         local seedData = seedDataModules.getData(seedName)
         if seedData then
-            local countToAdd = seedData.getRandomStock()
-            seedData.ServerData.CurrentStock = math.clamp(
-                seedData.ServerData.CurrentStock*countToAdd,
+            local countToAdd = seedDataModules.getStockIncrement(seedName)
+            seedData.Server.CurrentStock.Value = math.clamp(
+                seedData.Server.CurrentStock.Value*countToAdd,
                 0,
-                seedData.ServerData.MaxStock
+                seedData.Server.MaxStock.Value
             )
         end
     end

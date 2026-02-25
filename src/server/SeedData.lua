@@ -8,7 +8,12 @@ local SeedData = {
     }
 }
 
-function SeedData.getStockIncrement()
+function SeedData.getStockIncrement(seedName: string)
+    if seedName == "Carrot Seed" then
+        return math.random(1,5)
+    end
+    return 1
+end
 function SeedData.getStockCount(seedName: string)
     local data = SeedData.getData(seedName)
     if data then
@@ -20,7 +25,7 @@ function SeedData.getSeedOrder()
     return SeedData.seedOrder
 end
 function SeedData.getData(seedName: string)
-    return script.FindFirstChild(seedName) or nil
+    return script:FindFirstChild(seedName) or nil
 end
 
 return SeedData
