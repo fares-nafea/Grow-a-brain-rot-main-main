@@ -28,6 +28,18 @@
         "$className": "Folder",
         "SeedData": {
           "$path": "src/server/SeedData.lua",
+          "carrot Seed": {
+           "$className": "Folder",
+           "Cost": {
+            "$className": "IntValue"
+           },
+           "DisplayName": {
+            "$className": "StringValue"
+           },
+           "Icon": {
+            "$className": "StringValue"
+           }
+          },
           "Carrot Seed": {
             "$path": "src/server/Carrot Seed.lua"
           }
