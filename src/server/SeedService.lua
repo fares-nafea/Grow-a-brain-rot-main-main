@@ -1,5 +1,4 @@
 -- Seed Service
-
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local players = game:GetService("Players")
 
@@ -14,39 +13,46 @@ local Service = {
     DEFAULT_RESTOCK_TIME = 10,
 }
 
+-- Function: Give Seed to Player
 function Service.giveSeed(player: Player, seedName: string, amount: number, reduceStock: boolean)
-    if player and seedName then
-        -- Give the [player] the [seedName]
-        local seedData = seedDataModules.getData(seedName)
-        local playerData = Service.cachedModules.DataService.getData(player)
-        if playerData and seedData then
-            local inventory = playerData.Inventory
-            local foundSeed = inventory[seedName]
+    local inventoryService = Service.cachedModules.InventoryService
+    if not (player and seedName) then return end
 
-            if reduceStock == true then
-                -- Reduce
-                seedData.Server.CurrentStock.Value = math.clamp(
-                    seedData.Server.CurrentStock.Value-amount,
-                    0,
-                    seedData.Server.MaxStock.Value
-                )
-            end
-            if foundSeed then
-                foundSeed.Count += amount
-            else
-                inventory[seedName] = {Count = amount}
-            end
+    local seedData = seedDataModules.getData(seedName)
+    local playerData = Service.cachedModules.DataService.getData(player)
+
+    if playerData and seedData then
+        local inventory = playerData.Inventory
+        local foundSeed = inventory[seedName]
+
+        -- Reduce stock if applicable
+        if reduceStock == true then
+            seedData.Server.CurrentStock.Value = math.clamp(
+                seedData.Server.CurrentStock.Value - amount,
+                0,
+                seedData.Server.MaxStock.Value
+            )
         end
+
+        -- Update inventory
+        if foundSeed then
+            foundSeed.Count += amount
+        else
+            inventory[seedName] = { Count = amount }
+        end
+
+        inventoryService.inventoryUpdated(player, seedName)
     end
 end
+
+-- Function: Restock Seeds
 function Service.restockSeed(data: any)
-    if data then
-        if data.resetTimer then
-            -- Reset Timer
-            serverInfo.SEED_RESTOCK_TIMER.Value = Service.DEFAULT_RESTOCK_TIME
-        end
+    if data and data.resetTimer then
+        -- Reset timer
+        serverInfo.SEED_RESTOCK_TIMER.Value = Service.DEFAULT_RESTOCK_TIME
     end
-    -- Restocking
+
+    -- Restocking each seed
     for _, seedName: string in seedDataModules.getSeedOrder() do
         local seedData = seedDataModules.getData(seedName)
         if seedData then
@@ -58,12 +64,14 @@ function Service.restockSeed(data: any)
             )
         end
     end
-    ---
 end
+
+-- Function: Initialize Service
 function Service.init()
     local dataService = Service.cachedModules.DataService
     local moneyService = Service.cachedModules.MoneyService
-    -- Handling Remote Events
+
+    -- Handling BuySeed Remote Event
     remotes.BuySeed.onServerEvent:Connect(function(player, seedName: string)
         if player:GetAttribute("DataLoaded") ~= true then return end
 
@@ -71,31 +79,25 @@ function Service.init()
         if not playerData then return end
 
         local seedData = seedDataModules.getData(seedName)
-        if seedData then
-            -- Checking if inStock
-            if seedData.Server.CurrentStock.Value <= 0 then
-                return
-            end
-            --- Checking if has enough money
-            if playerData.Sheckles < seedData.Cost.Value then
-                return
-            end
-            -- Buy the Seed
-            moneyService.giveMoney(player, - seedData.Cost.Value)
-            Service.giveSeed(player, seedName, 1, true)
-        end
+        if not seedData then return end
+
+        -- Check if in stock
+        if seedData.Server.CurrentStock.Value <= 0 then return end
+
+        -- Check if player has enough money
+        if playerData.Sheckles < seedData.Cost.Value then return end
+
+        -- Process purchase
+        moneyService.giveMoney(player, -seedData.Cost.Value)
+        Service.giveSeed(player, seedName, 1, true)
     end)
-    -- Restocking Timer
+
+    -- Start Restocking Timer
     serverInfo.SEED_RESTOCK_TIMER.Value = Service.DEFAULT_RESTOCK_TIME
     task.spawn(function()
         while true do
             if serverInfo.SEED_RESTOCK_TIMER.Value <= 0 then
-                -- Restock Seeds
-
                 Service.restockSeed()
-
-
-                -- Reset Timer
                 serverInfo.SEED_RESTOCK_TIMER.Value = Service.DEFAULT_RESTOCK_TIME
             else
                 serverInfo.SEED_RESTOCK_TIMER.Value -= 1
@@ -103,7 +105,6 @@ function Service.init()
             task.wait(1)
         end
     end)
-    -------------------
 end
 
 return Service

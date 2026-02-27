@@ -295,6 +295,9 @@
 
         "SeedService": {
           "$path": "src/server/SeedService.lua"
+        },
+        "InventoryService": {
+          "$path": "src/server/InventoryService.lua"
         }
       }
     }

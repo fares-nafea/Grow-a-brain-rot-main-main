@@ -32,13 +32,23 @@ function Service.init()
 	-- DataLoaded
 	local moneyService = Service.cachedModules.MoneyService
 	local plotService = Service.cachedModules.PlotService
+	local inventoryService = Service.cachedModules.InventoryService
 
-
+	local function characterAdded(character: Model)
+		inventoryService.characterAdded(character)
+	end
 	local function dataLoaded(player: Player)
 		local profile = Service.Profiles[player]
 		if profile then
 			moneyService.dataLoaded(player)
 			plotService.dataLoaded(player)
+
+
+		    -- Checking When Character Loads in
+			if player.Character then
+				characterAdded(player.Character)
+			end
+			player.CharacterAdded:Connect(characterAdded)
 		end
 	end
 
