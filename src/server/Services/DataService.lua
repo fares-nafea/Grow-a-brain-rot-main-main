@@ -96,7 +96,7 @@ function Service.init()
 	players.PlayerAdded:Connect(playerAdded)
 	players.PlayerRemoving:Connect(playerRemoved)
 
-	for _, player: Player in players:GetPlayers() do
+	for _, player in ipairs(players:GetPlayers()) do
 		playerAdded(player)
 	end
 end
