@@ -3,13 +3,13 @@
 local replicatedStorage = game:GetService("ReplicatedStorage")
 
 local remotes = replicatedStorage:WaitForChild("Remotes")
+local cachedModules = require(script.Parent.Parent.Server.cachedModules)
 
 local Service = {
-	cachedModules = {}
 }
 
 function Service.updateShecklesCount(player: Player)
-    local DataService = Service.cachedModules.DataService
+    local DataService = cachedModules.DataService
     local profileData = DataService.getData(player)
     if profileData then
         local leaderstats = player:FindFirstChild("leaderstats")
@@ -32,7 +32,7 @@ function Service.dataLoaded(player: Player)
 
 end
 function Service.giveMoney(target: Player, amount: number)
-	local DataService = Service.cachedModules.DataService
+	local DataService = cachedModules.DataService
     
 	local profileData = DataService.getData(target)
 	if profileData then

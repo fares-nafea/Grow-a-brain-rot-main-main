@@ -6,8 +6,11 @@ local ServerStorage = game:GetService("ServerStorage")
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 local Modules = ReplicatedStorage:WaitForChild("Modules")
 local ServerInfo = ReplicatedStorage:WaitForChild("ServerInfo")
+
 local SeedDataModules = require(Modules:WaitForChild("SeedData"))
 local SeedStorage = ServerStorage:WaitForChild("Seeds")
+local cachedModules = require(script.Parent.Parent.Server.cachedModules)
+
 
 local Service = {
     cachedModules = {},
@@ -15,7 +18,7 @@ local Service = {
 
 -- تحديث الأدوات في Inventory
 function Service.createNewTool(player: Player, toolName: string)
-    local dataService = Service.cachedModules.DataService
+    local dataService = cachedModules.DataService
     local playerData = dataService.getData(player)
     
     if playerData then
@@ -34,7 +37,7 @@ function Service.createNewTool(player: Player, toolName: string)
     end
 end
 function Service.inventoryUpdated(player: Player, ...)
-    local dataService = Service.cachedModules.DataService
+    local dataService = cachedModules.DataService
     if not dataService then return end
 
     local playerData = dataService.getData(player)
@@ -75,7 +78,7 @@ end
 function Service.characterAdded(character: Model)
     local player = Players:GetPlayerFromCharacter(character)
 
-    local dataService = Service.cachedModules.DataService
+    local dataService = cachedModules.DataService
     local playerData = dataService.getData(player)
 
     if playerData then

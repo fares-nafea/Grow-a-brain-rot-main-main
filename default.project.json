@@ -267,7 +267,10 @@
       "$className": "ServerScriptService",
 
       "Server": {
-        "$path": "src/server/Server.server.lua"
+        "$path": "src/server/Server.server.lua",
+        "CachedModules": { 
+          "$path": "src/server/cachedModules.lua"
+        }
       },
 
       "Services": {

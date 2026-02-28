@@ -11,8 +11,11 @@ for _, moduleScript: ModuleScript in servicesFolder:GetChildren() do
 		cachedModules[moduleScript.Name] = require(moduleScript)
 	end
 end
+
+local requiredModule = require(script.CachedModules)
+requiredModule = cachedModules
+
 for moduleName: string, moduleScript in cachedModules do
-	moduleScript.cachedModules = cachedModules
 	if moduleScript.init then
 		moduleScript.init()
 	end
