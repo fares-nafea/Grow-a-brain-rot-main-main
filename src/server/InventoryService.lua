@@ -32,6 +32,10 @@ function Service.createNewTool(player: Player, toolName: string)
                 toolClone.Name = toolName .. " (X" .. tostring(itemData.Count) .. ")"
                 toolClone:SetAttribute("trueName", toolName)
                 toolClone.Parent = player:WaitForChild("Backpack")
+
+                local activator = script.SeedActivator:Clone()
+                activator.Parent = toolClone
+                require(activator)
             end
         end
     end

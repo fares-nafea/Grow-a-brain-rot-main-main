@@ -21,7 +21,10 @@
         "$className": "Folder",
         "BuySeed": {
           "$className": "RemoteEvent"
-        }
+        },
+        "GetMouseCF": {
+            "$className": "RemoteFunction"
+          }
       },
 
       "Modules": {
@@ -64,6 +67,9 @@
         },
         "ResetDisable": {
           "$path": "src/client/ResetDisable.client.lua"
+        },
+        "GetMouseCF": {
+          "$path": "src/client/GetMouseCF.client.lua"
         }
       }
     },
@@ -300,7 +306,10 @@
           "$path": "src/server/SeedService.lua"
         },
         "InventoryService": {
-          "$path": "src/server/InventoryService.lua"
+          "$path": "src/server/InventoryService.lua",
+          "SeedActivator": {
+            "$path": "src/server/SeedActivator.lua"
+          }
         }
       }
     }
