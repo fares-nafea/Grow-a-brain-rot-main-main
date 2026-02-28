@@ -7,7 +7,7 @@ local remotes = replicatedStorage:WaitForChild("Remotes")
 
 local profileStore = require(script.ProfileStore)
 local profileTemplate = require(script.Template)
-local cachedModules = require(script.Parent.Parent.Server.cachedModules)
+local cachedModules = require(script.Parent.Parent.Server.CachedModules)
 
 local PlayerStore = profileStore.New("PlayerStore_002", profileTemplate)
 
@@ -30,9 +30,9 @@ end
 
 function Service.init()
 	-- DataLoaded
-	local moneyService = cachedModules.MoneyService
-	local plotService = cachedModules.PlotService
-	local inventoryService = cachedModules.InventoryService
+	local moneyService = cachedModules.Cache.MoneyService
+	local plotService = cachedModules.Cache.PlotService
+	local inventoryService = cachedModules.Cache.InventoryService
 
 	local function characterAdded(character: Model)
 		inventoryService.characterAdded(character)

@@ -13,7 +13,7 @@ for _, moduleScript: ModuleScript in servicesFolder:GetChildren() do
 end
 
 local requiredModule = require(script.CachedModules)
-requiredModule = cachedModules
+requiredModule.Cache = cachedModules
 
 for moduleName: string, moduleScript in cachedModules do
 	if moduleScript.init then

@@ -269,7 +269,7 @@
       "Server": {
         "$path": "src/server/Server.server.lua",
         "CachedModules": { 
-          "$path": "src/server/cachedModules.lua"
+          "$path": "src/server/CachedModules.lua"
         }
       },
 

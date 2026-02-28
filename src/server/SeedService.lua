@@ -7,7 +7,7 @@ local modules = replicatedStorage.Modules
 local serverInfo = replicatedStorage.ServerInfo
 
 local seedDataModules = require(modules.SeedData)
-local cachedModules = require(script.Parent.Parent.Server.cachedModules)
+local cachedModules = require(script.Parent.Parent.Server.CachedModules)
 
 
 local Service = {
@@ -16,11 +16,11 @@ local Service = {
 
 -- Give Seed to Player
 function Service.giveSeed(player: Player, seedName: string, amount: number, reduceStock: boolean)
-    local inventoryService = cachedModules.InventoryService
+    local inventoryService = cachedModules.Cache.InventoryService
     if not (player and seedName) then return end
 
     local seedData = seedDataModules.getData(seedName)
-    local playerData = cachedModules.DataService.getData(player)
+    local playerData = cachedModules.Cache.DataService.getData(player)
 
     if playerData and seedData then
         local inventory = playerData.Inventory
@@ -67,8 +67,8 @@ end
 
 -- Initialize Service
 function Service.init()
-    local dataService = cachedModules.DataService
-    local moneyService = cachedModules.MoneyService
+    local dataService = cachedModules.Cache.DataService
+    local moneyService = cachedModules.Cache.MoneyService
 
     -- Handle BuySeed Remote Event
     remotes.BuySeed.onServerEvent:Connect(function(player, seedName: string)
