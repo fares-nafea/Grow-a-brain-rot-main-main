@@ -14,6 +14,25 @@ local Service = {
 }
 
 -- تحديث الأدوات في Inventory
+function Service.createNewTool(player: Player, toolName: string)
+    local dataService = Service.cachedModules.DataService
+    local playerData = dataService.getData(player)
+    
+    if playerData then
+        local inventory = playerData.Inventory
+        local itemData = inventory[toolName]
+
+        if itemData then
+            local isSeed = game.ServerStorage.Seeds:FindFirstChild(toolName)
+            if isSeed then
+                local toolClone = isSeed:Clone()
+                toolClone.Name = toolName .. " (X" .. tostring(itemData.Count) .. ")"
+                toolClone:SetAttribute("trueName", toolName)
+                toolClone.Parent = player:WaitForChild("Backpack")
+            end
+        end
+    end
+end
 function Service.inventoryUpdated(player: Player, ...)
     local dataService = Service.cachedModules.DataService
     if not dataService then return end
@@ -44,6 +63,8 @@ function Service.inventoryUpdated(player: Player, ...)
             end
             if foundItem then
                 foundItem.Name = itemUpdated .. " (X" .. tostring(foundItemInInventory.Count) .. ")"
+            else
+                
             end
         end
     end
@@ -53,41 +74,20 @@ end
 -- تحميل الأدوات عند دخول Character
 function Service.characterAdded(character: Model)
     local player = Players:GetPlayerFromCharacter(character)
-    if not player then return end
 
     local dataService = Service.cachedModules.DataService
-    if not dataService then return end
-
     local playerData = dataService.getData(player)
-    if not playerData then return end
 
-    for itemName, itemData in pairs(playerData.Inventory) do
-        local seedTemplate = SeedStorage:FindFirstChild(itemName)
-        if seedTemplate then
-            local toolClone = seedTemplate:Clone()
-            toolClone.Name = itemName .. " (X" .. tostring(itemData.Count) .. ")"
-            toolClone:SetAttribute("trueName", itemName)
-            toolClone.Parent = player:WaitForChild("Backpack")
+    if playerData then
+        -- Loads in tool
+        for itemName, data in pairs(playerData.Inventory) do
+            Service.createNewTool(player, itemName)
         end
     end
 end
 
--- ربط اللاعبين الحاليين والجدد
 function Service.init()
-    local function setupPlayer(player)
-        if player.Character then
-            Service.characterAdded(player.Character)
-        end
-        player.CharacterAdded:Connect(Service.characterAdded)
-    end
 
-    -- إعداد اللاعبين الحاليين
-    for _, player in pairs(Players:GetPlayers()) do
-        setupPlayer(player)
-    end
-
-    -- متابعة اللاعبين الجدد
-    Players.PlayerAdded:Connect(setupPlayer)
 end
 
 return Service
