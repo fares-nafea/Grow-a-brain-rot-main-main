@@ -21,28 +21,29 @@ function Service.inventoryUpdated(player: Player, ...)
     local playerData = dataService.getData(player)
     if not playerData then return end
 
-    if playerData then
-        local inventory = playerData.Inventory
-        
-        local arguments = {...}
+    local inventory = playerData.Inventory
+    local arguments = {...}
 
-        for _, itemUpdated in arguments do
-            local foundItemInInventory = inventory[itemUpdated]
-            if foundItemInInventory then
-                -- Checking in the backpack
-                for  _, v in player.Backpack:GetChildren() do
-                    if v:IsA("Tool") and v:GetAttribute("trueName") == itemUpdated then
-                        foundItem =  v
-                    end
+    for _, itemUpdated in ipairs(arguments) do
+        local foundItemInInventory = inventory[itemUpdated]
+        if foundItemInInventory then
+            local foundItem = nil
+            -- Checking in the backpack
+            for _, v in player.Backpack:GetChildren() do
+                if v:IsA("Tool") and v:GetAttribute("trueName") == itemUpdated then
+                    foundItem = v
+                    break
                 end
+            end
 
+            if not foundItem and player.Character then
                 local tool = player.Character:FindFirstChildWhichIsA("Tool")
                 if tool and tool:GetAttribute("trueName") == itemUpdated then
                     foundItem = tool
                 end
-                if foundItem then
-                    foundItem.Name = itemUpdated.." (X"..tostring(foundItemInInventory.Count)..")"
-                end
+            end
+            if foundItem then
+                foundItem.Name = itemUpdated .. " (X" .. tostring(foundItemInInventory.Count) .. ")"
             end
         end
     end

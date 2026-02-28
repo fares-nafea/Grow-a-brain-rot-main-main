@@ -56,7 +56,7 @@ function Service.restockSeed(data: any)
         if seedData then
             local countToAdd = seedDataModules.getStockIncrement(seedName)
             seedData.Server.CurrentStock.Value = math.clamp(
-                seedData.Server.CurrentStock.Value * countToAdd,
+                seedData.Server.CurrentStock.Value + countToAdd,
                 0,
                 seedData.Server.MaxStock.Value
             )
