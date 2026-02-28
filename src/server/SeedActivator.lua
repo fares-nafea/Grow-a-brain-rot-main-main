@@ -35,6 +35,25 @@ Tool.Activated:Connect(function()
             if not plotService.locationIsWithinPlot(playerPlot, mouseCFrame) then
                 return
             end
+            -- Getting Seed Offset Form the Ground 
+            local plantModel = replicatedStorage.Assets.PlantEffect:FindFirstChild(
+                Tool:GetAttribute("trueName"):split(" ")[1]
+            )
+
+            if plantModel then
+                plantModel = plantModel.ServerModel
+
+                local plotCFrame, plotSize = playerPlot.RightSoil:GetBoundingBox()
+
+                local plotTopY = plotCFrame.Position.Y + plotService.Y/2
+                local plantHeightOFfset = plantModel.PrimaryPart.Size.Y
+
+                local spwanPosition = Vector3.new(
+                    mouseCFrame.Position.X,
+                    plotTopY+plantHeightOFfset,
+                    mouseCFrame.Position.Z
+                )
+            end
         end
     end
 end)

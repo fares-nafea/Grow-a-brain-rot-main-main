@@ -11,6 +11,18 @@ local Plots = Map:WaitForChild("Plots")
 
 function Service.locationIsWithinPlot(plot: Model, location: CFrame)
     if plot and location then
+        local rightSoil = plot:FindFirstChild("RightSoil")
+        if rightSoil then
+            local params = RaycastParams.new()
+            params.FilterType = Enum.RaycastFilterType.Include
+            params.FilterDescendantsInstances = {rightSoil}
+            for _, part: Part in rightSoil:GetChildren() do
+                -- Casting Downwards
+                local result = workspace:Raycast(location.Position+Vector3.new(0,5,0), Vector3.new(0,-999999,0), params)
+                if result and result.Instance == part then
+                    return true
+            end
+        end
     end
     return false
 end
