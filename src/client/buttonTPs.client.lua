@@ -25,7 +25,7 @@ local SeedsTPFrame = player:WaitForChild("PlayerGui")
 gardenTPFrame.MouseButton1Click:Connect(function()
     for _, plot: Model in pairs(workspace.World.Map.Plots:GetChildren()) do
         if plot:GetAttribute("Taken") == true and plot:GetAttribute("Owner") == player.UserId then
-            local TPpart = plot:WaitForChild("TPpart")
+            local TPpart = plot:WaitForChild("TPPart")
             -- teleport here
             character:SetPrimaryPartCFrame(TPpart.CFrame)
         end

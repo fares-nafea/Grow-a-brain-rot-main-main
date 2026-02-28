@@ -8,6 +8,12 @@ local World = workspace:WaitForChild("World")
 local Map = World:WaitForChild("Map")
 local Plots = Map:WaitForChild("Plots")
 
+
+function Service.locationIsWithinPlot(plot: Model, location: CFrame)
+    if plot and location then
+    end
+    return false
+end
 function Service.getMaxPlots()
     return Plots:GetChildren()
 end

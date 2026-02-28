@@ -28,7 +28,14 @@ Tool.Activated:Connect(function()
     debris:AddItem(db, .5)
 
     if playerPlot then
-        -
+
+        local mouseCFrame = remotes.GetMouseCF:InvokeClient(Player)
+
+        if mouseCFrame then
+            if not plotService.locationIsWithinPlot(playerPlot, mouseCFrame) then
+                return
+            end
+        end
     end
 end)
 
