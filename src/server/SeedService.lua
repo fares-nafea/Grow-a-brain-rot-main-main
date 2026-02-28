@@ -13,7 +13,7 @@ local Service = {
     DEFAULT_RESTOCK_TIME = 10,
 }
 
--- Function: Give Seed to Player
+-- Give Seed to Player
 function Service.giveSeed(player: Player, seedName: string, amount: number, reduceStock: boolean)
     local inventoryService = Service.cachedModules.InventoryService
     if not (player and seedName) then return end
@@ -25,8 +25,8 @@ function Service.giveSeed(player: Player, seedName: string, amount: number, redu
         local inventory = playerData.Inventory
         local foundSeed = inventory[seedName]
 
-        -- Reduce stock if applicable
-        if reduceStock == true then
+        -- Reduce stock if needed
+        if reduceStock then
             seedData.Server.CurrentStock.Value = math.clamp(
                 seedData.Server.CurrentStock.Value - amount,
                 0,
@@ -45,20 +45,18 @@ function Service.giveSeed(player: Player, seedName: string, amount: number, redu
     end
 end
 
--- Function: Restock Seeds
+-- Restock Seeds
 function Service.restockSeed(data: any)
     if data and data.resetTimer then
-        -- Reset timer
         serverInfo.SEED_RESTOCK_TIMER.Value = Service.DEFAULT_RESTOCK_TIME
     end
 
-    -- Restocking each seed
     for _, seedName: string in seedDataModules.getSeedOrder() do
         local seedData = seedDataModules.getData(seedName)
         if seedData then
             local countToAdd = seedDataModules.getStockIncrement(seedName)
             seedData.Server.CurrentStock.Value = math.clamp(
-                seedData.Server.CurrentStock.Value + countToAdd,
+                seedData.Server.CurrentStock.Value * countToAdd,
                 0,
                 seedData.Server.MaxStock.Value
             )
@@ -66,12 +64,12 @@ function Service.restockSeed(data: any)
     end
 end
 
--- Function: Initialize Service
+-- Initialize Service
 function Service.init()
     local dataService = Service.cachedModules.DataService
     local moneyService = Service.cachedModules.MoneyService
 
-    -- Handling BuySeed Remote Event
+    -- Handle BuySeed Remote Event
     remotes.BuySeed.onServerEvent:Connect(function(player, seedName: string)
         if player:GetAttribute("DataLoaded") ~= true then return end
 
@@ -81,10 +79,8 @@ function Service.init()
         local seedData = seedDataModules.getData(seedName)
         if not seedData then return end
 
-        -- Check if in stock
+        -- Check stock and money
         if seedData.Server.CurrentStock.Value <= 0 then return end
-
-        -- Check if player has enough money
         if playerData.Sheckles < seedData.Cost.Value then return end
 
         -- Process purchase

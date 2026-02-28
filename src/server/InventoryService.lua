@@ -1,99 +1,92 @@
-local replicatedStorage = game:GetService("ReplicatedStorage")
-local players = game:GetService("Players")
+-- Inventory Service
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local ServerStorage = game:GetService("ServerStorage")
 
-local seedStorage = game.ServerStorage:WaitForChild("Seeds")
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+local Modules = ReplicatedStorage:WaitForChild("Modules")
+local ServerInfo = ReplicatedStorage:WaitForChild("ServerInfo")
+local SeedDataModules = require(Modules:WaitForChild("SeedData"))
+local SeedStorage = ServerStorage:WaitForChild("Seeds")
 
 local Service = {
-	cachedModules = {},
+    cachedModules = {},
 }
 
-function Service.inventoryUpdated(player: Player, seedName: string)
+-- تحديث الأدوات في Inventory
+function Service.inventoryUpdated(player: Player, ...)
+    local dataService = Service.cachedModules.DataService
+    if not dataService then return end
 
-	local dataService = Service.cachedModules.DataService
-	if not dataService then return end
+    local playerData = dataService.getData(player)
+    if not playerData then return end
 
-	local playerData = dataService.getData(player)
-	if not playerData then return end
+    if playerData then
+        local inventory = playerData.Inventory
+        
+        local arguments = {...}
 
-	local inventory = playerData.Inventory
-	local seedData = inventory[seedName]
-	if not seedData then return end
+        for _, itemUpdated in arguments do
+            local foundItemInInventory = inventory[itemUpdated]
+            if foundItemInInventory then
+                -- Checking in the backpack
+                for  _, v in player.Backpack:GetChildren() do
+                    if v:IsA("Tool") and v:GetAttribute("trueName") == itemUpdated then
+                        foundItem =  v
+                    end
+                end
 
-	local backpack = player:WaitForChild("Backpack")
-	local seedTemplate = seedStorage:FindFirstChild(seedName)
-	if not seedTemplate then return end
-
-	local tool = nil
-
-	for _, t in ipairs(backpack:GetChildren()) do
-		if t:IsA("Tool") and t:GetAttribute("trueName") == seedName then
-			tool = t
-			break
-		end
-	end
-
-	if not tool then
-		tool = seedTemplate:Clone()
-		tool:SetAttribute("trueName", seedName)
-		tool.Parent = backpack
-	end
-
-	tool.Name = seedName .. " (X" .. tostring(seedData.Count) .. ")"
+                local tool = player.Character:FindFirstChildWhichIsA("Tool")
+                if tool and tool:GetAttribute("trueName") == itemUpdated then
+                    foundItem = tool
+                end
+                if foundItem then
+                    foundItem.Name = itemUpdated.." (X"..tostring(foundItemInInventory.Count)..")"
+                end
+            end
+        end
+    end
 end
 
+
+-- تحميل الأدوات عند دخول Character
 function Service.characterAdded(character: Model)
+    local player = Players:GetPlayerFromCharacter(character)
+    if not player then return end
 
-	local player = players:GetPlayerFromCharacter(character)
-	if not player then return end
+    local dataService = Service.cachedModules.DataService
+    if not dataService then return end
 
-	local dataService = Service.cachedModules.DataService
-	if not dataService then return end
+    local playerData = dataService.getData(player)
+    if not playerData then return end
 
-	local playerData = dataService.getData(player)
-	if not playerData then return end
-
-	local backpack = player:WaitForChild("Backpack")
-
-	for seedName, data in pairs(playerData.Inventory) do
-		if data.Count > 0 then
-
-			local toolExists = false
-
-			for _, t in ipairs(backpack:GetChildren()) do
-				if t:IsA("Tool") and t:GetAttribute("trueName") == seedName then
-					toolExists = true
-					break
-				end
-			end
-
-			if not toolExists then
-				local seedTemplate = seedStorage:FindFirstChild(seedName)
-				if seedTemplate then
-					local toolClone = seedTemplate:Clone()
-					toolClone:SetAttribute("trueName", seedName)
-					toolClone.Name = seedName .. " (X" .. tostring(data.Count) .. ")"
-					toolClone.Parent = backpack
-				end
-			end
-		end
-	end
+    for itemName, itemData in pairs(playerData.Inventory) do
+        local seedTemplate = SeedStorage:FindFirstChild(itemName)
+        if seedTemplate then
+            local toolClone = seedTemplate:Clone()
+            toolClone.Name = itemName .. " (X" .. tostring(itemData.Count) .. ")"
+            toolClone:SetAttribute("trueName", itemName)
+            toolClone.Parent = player:WaitForChild("Backpack")
+        end
+    end
 end
 
+-- ربط اللاعبين الحاليين والجدد
 function Service.init()
+    local function setupPlayer(player)
+        if player.Character then
+            Service.characterAdded(player.Character)
+        end
+        player.CharacterAdded:Connect(Service.characterAdded)
+    end
 
-	local function setupPlayer(player)
-		if player.Character then
-			Service.characterAdded(player.Character)
-		end
+    -- إعداد اللاعبين الحاليين
+    for _, player in pairs(Players:GetPlayers()) do
+        setupPlayer(player)
+    end
 
-		player.CharacterAdded:Connect(Service.characterAdded)
-	end
-
-	for _, player in ipairs(players:GetPlayers()) do
-		setupPlayer(player)
-	end
-
-	players.PlayerAdded:Connect(setupPlayer)
+    -- متابعة اللاعبين الجدد
+    Players.PlayerAdded:Connect(setupPlayer)
 end
 
 return Service
