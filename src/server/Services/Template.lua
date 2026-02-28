@@ -1,5 +1,5 @@
 local template = {
-    Sheckles = 0,
+    Sheckles = 1000,
     Inventory = {},
 }
 return template

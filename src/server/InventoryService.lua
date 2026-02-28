@@ -64,7 +64,7 @@ function Service.inventoryUpdated(player: Player, ...)
             if foundItem then
                 foundItem.Name = itemUpdated .. " (X" .. tostring(foundItemInInventory.Count) .. ")"
             else
-                
+                Service.createNewTool(player, itemUpdated)
             end
         end
     end

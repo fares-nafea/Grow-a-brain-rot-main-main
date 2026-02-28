@@ -8,7 +8,7 @@ local remotes = replicatedStorage:WaitForChild("Remotes")
 local profileStore = require(script.ProfileStore)
 local profileTemplate = require(script.Template)
 
-local PlayerStore = profileStore.New("PlayerStore", profileTemplate)
+local PlayerStore = profileStore.New("PlayerStore_002", profileTemplate)
 
 local Service = {
 	cachedModules = {},
