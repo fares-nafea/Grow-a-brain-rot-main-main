@@ -8,7 +8,6 @@ local World = workspace:WaitForChild("World")
 local Map = World:WaitForChild("Map")
 local Plots = Map:WaitForChild("Plots")
 
-
 function Service.locationIsWithinPlot(plot: Model, location: CFrame)
     if plot and location then
         local rightSoil = plot:FindFirstChild("RightSoil")
@@ -16,27 +15,37 @@ function Service.locationIsWithinPlot(plot: Model, location: CFrame)
             local params = RaycastParams.new()
             params.FilterType = Enum.RaycastFilterType.Include
             params.FilterDescendantsInstances = {rightSoil}
+
             for _, part: Part in rightSoil:GetChildren() do
                 -- Casting Downwards
-                local result = workspace:Raycast(location.Position+Vector3.new(0,5,0), Vector3.new(0,-999999,0), params)
+                local result = workspace:Raycast(
+                    location.Position + Vector3.new(0,5,0),
+                    Vector3.new(0,-999999,0),
+                    params
+                )
+
                 if result and result.Instance == part then
                     return true
+                end
             end
         end
     end
     return false
 end
+
 function Service.getMaxPlots()
     return Plots:GetChildren()
 end
+
 function Service.getPlot(player: Player)
     for _, plot: Model in workspace.World.Map.Plots:GetChildren() do
-        if plot:GetAttribute("Taken") == true and plot :GetAttribute("Owner") == player.UserId then
+        if plot:GetAttribute("Taken") == true and plot:GetAttribute("Owner") == player.UserId then
             return plot
         end
     end
     return nil
 end
+
 function Service.getAvailablePlot(player: Player)
     for _, plot: Model in ipairs(Service.getMaxPlots()) do
         if plot:GetAttribute("Taken") then
@@ -46,6 +55,7 @@ function Service.getAvailablePlot(player: Player)
     end
     return nil
 end
+
 function Service.dataLoaded(player: Player)
     local plot = Service.getAvailablePlot(player)
     if plot then
@@ -58,10 +68,12 @@ function Service.dataLoaded(player: Player)
         local ImageSize = Enum.ThumbnailSize.Size60x60
         local ImageType = Enum.ThumbnailType.HeadShot
         local content = players:GetUserThumbnailAsync(player.UserId, ImageType, ImageSize)
+
         playerSign.Main.SurfaceGui.ImageLabel.ImageTransparency = 0
         playerSign.Main.SurfaceGui.ImageLabel.Image = content
     end
 end
+
 function Service.playerRemoved(player: Player)
     local foundPlot = Service.getPlot(player)
     if foundPlot then

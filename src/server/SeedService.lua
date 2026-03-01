@@ -1,6 +1,8 @@
 -- Seed Service
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local players = game:GetService("Players")
+local debris = game:GetService("Debris")
+local httpService = game:GetService("HttpService")
 
 local remotes = replicatedStorage.Remotes
 local modules = replicatedStorage.Modules
@@ -14,7 +16,75 @@ local Service = {
     DEFAULT_RESTOCK_TIME = 10,
 }
 
--- Give Seed to Player
+function Service.generateKey(prefix: string)
+    return prefix..":"..string.sub(httpService.GenerateGUID(false), 1, 5)
+end
+function Service.isCloseToPlant(referencePoint: Part, plotData: any, locationToPlant: CFrame, magnitudeThreshold: number)
+    if plotData and locationToPlant and magnitudeThreshold and referencePoint then
+        for plantKey: string, data: any in plotData do
+            -- Converting Saved location to World Location for checking
+            local location = CFrame.new( table.unpack(data.location) )
+            location = referencePoint.CFrame:ToObjectSpace(location)
+            --
+
+            local distance = (location.Position - locationToPlant.Position).Magnitude
+            if distance < magnitudeThreshold then
+                return true
+            end
+        end
+    end
+    return false
+end
+function Service.plantSeed(player: Player, seedName: string, location: CFrame)
+    local character = player.Character
+
+    if player and location and character then
+        local dataService = cachedModules.Cache.DataService
+        local inventoryService = cachedModules.Cache.InventoryService
+        local plotService = cachedModules.Cache.PlotService
+
+        local seedData = seedDataModules.getData(seedName)
+        local playerData = dataService.getData(player)
+
+        if playerData and seedData then
+            local currentTool = character:FindFirstChild("Tool")
+            if currentTool and currentTool:getAttribute("isSeed") == true and currentTool:getAttribute("trueName") == seedName then
+                -- Checking for Tool in Inventory
+                local inventory = playerData.Inventory
+                local foundSeed = inventory[seedName]
+                
+                if foundSeed then
+                    if player:FindFirstChild("PlantDebounce") then
+                        return
+                    end
+                    local debounce = Instance.new("Folder")
+                    debounce.Name = "PlantDebounce"
+                    debounce.Parent = player
+                    debris:AddItem(debounce, 0.5)
+
+                    local plotData = playerData.PlotData
+                    -- Checking if too close to another plant
+                    local isTooClose = Service.isCloseToPlant(
+                        plotService.getPlot(player).ReferencePoint,
+                        plotData,
+                        location,
+                        2.5
+                    )
+                    if isTooClose then
+                        return
+                    end
+
+
+
+                    local locationToSave = plotService.getPlot(player).ReferencePoint.CFrame:ToObjectSpace(location)
+                    
+                    -- generate key
+                    local key = Service.generateKey(seedData.SeedPrefix.Value)
+                end
+            end
+        end
+    end
+end
 function Service.giveSeed(player: Player, seedName: string, amount: number, reduceStock: boolean)
     local inventoryService = cachedModules.Cache.InventoryService
     if not (player and seedName) then return end
@@ -46,7 +116,6 @@ function Service.giveSeed(player: Player, seedName: string, amount: number, redu
     end
 end
 
--- Restock Seeds
 function Service.restockSeed(data: any)
     if data and data.resetTimer then
         serverInfo.SEED_RESTOCK_TIMER.Value = Service.DEFAULT_RESTOCK_TIME
@@ -65,7 +134,6 @@ function Service.restockSeed(data: any)
     end
 end
 
--- Initialize Service
 function Service.init()
     local dataService = cachedModules.Cache.DataService
     local moneyService = cachedModules.Cache.MoneyService

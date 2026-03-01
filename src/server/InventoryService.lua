@@ -30,6 +30,7 @@ function Service.createNewTool(player: Player, toolName: string)
             if isSeed then
                 local toolClone = isSeed:Clone()
                 toolClone.Name = toolName .. " (X" .. tostring(itemData.Count) .. ")"
+                toolClone:SetAttribute("isSeed", true)
                 toolClone:SetAttribute("trueName", toolName)
                 toolClone.Parent = player:WaitForChild("Backpack")
 

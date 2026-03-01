@@ -53,6 +53,9 @@ Tool.Activated:Connect(function()
                     plotTopY+plantHeightOFfset,
                     mouseCFrame.Position.Z
                 )
+                spwanPosition = CFrame.new(spwanPosition)
+
+                seedService.plantSeed(Player, Tool:getAttribute("trueName"), spwanPosition)
             end
         end
     end

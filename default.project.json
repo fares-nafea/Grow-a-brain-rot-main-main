@@ -39,19 +39,34 @@
            "DisplayName": {
             "$className": "StringValue"
            },
+           "SeedPrefix": {
+            "$className": "StringValue"
+           },
            "Icon": {
             "$className": "StringValue"
+           },
+           "GrowthTime": {
+            "$className": "NumberValue"
+           },
+           "HarvestCount": {
+            "$className": "IntValue"
+           },
+           "MultiHarvest": {
+            "$className": "BoolValue"
+           },
+           "HarvestInterval": {
+            "$className": "IntValue"
            },
            "Server": {
             "$className": "Folder",
             "CurrentStock": {
             "$className": "IntValue"
-            },
+           },
             "MaxStock": {
             "$className": "IntValue"
-            }
+           }
           }
-          }
+         }
         }
       }
     },
