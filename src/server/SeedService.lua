@@ -76,10 +76,38 @@ function Service.plantSeed(player: Player, seedName: string, location: CFrame)
 
 
 
-                    local locationToSave = plotService.getPlot(player).ReferencePoint.CFrame:ToObjectSpace(location)
+                    local locationToSave: CFrame = plotService.getPlot(player).ReferencePoint.CFrame:ToObjectSpace(location)
                     
                     -- generate key
                     local key = Service.generateKey(seedData.SeedPrefix.Value)
+                    local fruitsArray = {}
+                    for i = 1, #seedData.HarvestCount.Value do
+                        fruitsArray[i] = {CanHarvest = false, LastHarvest = os.time(), Mutations = ""}
+                    end
+
+                    plotData[key] = {
+                        GrowthPercentage = 0,
+                        LastGrowthIncrement = os.time(),
+                        DatePlanted = os.time(),
+                        location = { locationToSave:GetComponents() }
+                    }
+
+                    -- Plant Effect
+
+                    task.spawn(function()
+                        -- Recasting Down to the Ground
+                        local rightPlot = plotService.getPlot(player):FindFirstChild("RightSoil")
+                        if rightPlot then
+                            local params = RaycastParams.new()
+                            params.FilterType = Enum.RaycastFilterType.Include
+                            params.FilterDescendantsInstances = {rightPlot}    
+                            local result = workspace:Raycast(location.Position + Vector3.new(0,5,0),Vector3.new(0,-999999,0),params)
+
+                            if result then
+                                remotes.ClientEffects:FindAllClients("PlantEffects", {location = CFrame.new(result.Position)})
+                            end
+                        end
+                    end)
                 end
             end
         end

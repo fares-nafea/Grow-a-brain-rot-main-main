@@ -18,11 +18,7 @@ function Service.locationIsWithinPlot(plot: Model, location: CFrame)
 
             for _, part: Part in rightSoil:GetChildren() do
                 -- Casting Downwards
-                local result = workspace:Raycast(
-                    location.Position + Vector3.new(0,5,0),
-                    Vector3.new(0,-999999,0),
-                    params
-                )
+                local result = workspace:Raycast(location.Position + Vector3.new(0,5,0),Vector3.new(0,-999999,0),params)
 
                 if result and result.Instance == part then
                     return true

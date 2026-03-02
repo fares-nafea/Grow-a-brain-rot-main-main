@@ -24,11 +24,20 @@
         },
         "GetMouseCF": {
             "$className": "RemoteFunction"
-          }
+        },
+        "ClientEffects": {
+            "$className": "RemoteEvent"
+        }
       },
 
       "Modules": {
         "$className": "Folder",
+        "ClientEffects": {
+          "$className": "Folder",
+          "PlantEffect": {
+            "$path": "src/server/ClientEffects.lua"
+          }
+        },
         "SeedData": {
           "$path": "src/server/SeedData.lua",
           "Carrot Seed": {
@@ -85,6 +94,9 @@
         },
         "GetMouseCF": {
           "$path": "src/client/GetMouseCF.client.lua"
+        },
+        "ClientEffects": {
+          "$path": "src/client/ClientEffects.client.lua"
         }
       }
     },
