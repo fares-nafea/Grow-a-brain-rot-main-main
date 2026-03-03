@@ -35,7 +35,7 @@
         "ClientEffects": {
           "$className": "Folder",
           "PlantEffect": {
-            "$path": "src/server/ClientEffects.lua"
+            "$path": "src/server/PlantEffect.lua"
           }
         },
         "SeedData": {

@@ -81,7 +81,7 @@ function Service.plantSeed(player: Player, seedName: string, location: CFrame)
                     -- generate key
                     local key = Service.generateKey(seedData.SeedPrefix.Value)
                     local fruitsArray = {}
-                    for i = 1, #seedData.HarvestCount.Value do
+                    for i = 1, seedData.HarvestCount.Value do
                         fruitsArray[i] = {CanHarvest = false, LastHarvest = os.time(), Mutations = ""}
                     end
 
@@ -102,12 +102,12 @@ function Service.plantSeed(player: Player, seedName: string, location: CFrame)
                             params.FilterType = Enum.RaycastFilterType.Include
                             params.FilterDescendantsInstances = {rightPlot}    
                             local result = workspace:Raycast(location.Position + Vector3.new(0,5,0),Vector3.new(0,-999999,0),params)
-
                             if result then
                                 remotes.ClientEffects:FindAllClients("PlantEffects", {location = CFrame.new(result.Position)})
                             end
                         end
                     end)
+                    print(plotData)
                 end
             end
         end

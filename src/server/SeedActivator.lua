@@ -36,7 +36,7 @@ Tool.Activated:Connect(function()
                 return
             end
             -- Getting Seed Offset Form the Ground 
-            local plantModel = replicatedStorage.Assets.PlantEffect:FindFirstChild(
+            local plantModel = replicatedStorage.Assets.Plants:FindFirstChild(
                 Tool:GetAttribute("trueName"):split(" ")[1]
             )
 
@@ -45,8 +45,8 @@ Tool.Activated:Connect(function()
 
                 local plotCFrame, plotSize = playerPlot.RightSoil:GetBoundingBox()
 
-                local plotTopY = plotCFrame.Position.Y + plotService.Y/2
-                local plantHeightOFfset = plantModel.PrimaryPart.Size.Y
+                local plotTopY = plotCFrame.Position.Y + plotSize.Y/2
+                local plantHeightOFfset = plantModel.PrimaryPart.Size.Y/2
 
                 local spwanPosition = Vector3.new(
                     mouseCFrame.Position.X,
