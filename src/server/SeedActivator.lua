@@ -18,18 +18,18 @@ local Tool: Tool = script.Parent
 local Player: Player = Tool.Parent.Parent
 
 Tool.Activated:Connect(function()
-    if Player:FindFirstChild("SeedFrameDebounce") then
-        return
-    end
-    local playerPlot: Model = plotService.getPlot(Player)
-
-    local db = Instance.new("BoolValue")
-    db.Name = "SeedFrameDebounce"
-    db.Parent = Player
-    debris:AddItem(db, .5)
+	if Player:FindFirstChild("SeedPlantDebounce") then
+		return
+	end
+	
+	local playerPlot: Model = plotService.getPlot(Player)
+	
+	local db = Instance.new("BoolValue")
+	db.Name = "SeedPlantDebounce"
+	db.Parent = Player
+	debris:AddItem(db, .5)
 
     if playerPlot then
-
         local mouseCFrame = remotes.GetMouseCF:InvokeClient(Player)
 
         if mouseCFrame then
@@ -38,7 +38,7 @@ Tool.Activated:Connect(function()
             end
             -- Getting Seed Offset Form the Ground 
             local plantModel = replicatedStorage.Assets.Plants:FindFirstChild(
-                Tool:GetAttribute("trueName"):split(" ")[1]
+				Tool:GetAttribute("trueName"):split(" ")[1]
             )
 
             if plantModel then
@@ -49,14 +49,14 @@ Tool.Activated:Connect(function()
                 local plotTopY = plotCFrame.Position.Y + plotSize.Y/2
                 local plantHeightOFfset = plantModel.PrimaryPart.Size.Y/2
 
-                local spwanPosition = Vector3.new(
-                    mouseCFrame.Position.X,
-                    plotTopY+plantHeightOFfset,
-                    mouseCFrame.Position.Z
-                )
-                spwanPosition = CFrame.new(spwanPosition)
+                local spawnPosition = Vector3.new(
+					mouseCFrame.Position.X,
+					plotTopY+plantHeightOFfset,
+					mouseCFrame.Position.Z
+				)
+				spawnPosition = CFrame.new(spawnPosition)
 
-                seedService.plantSeed(Player, Tool:getAttribute("trueName"), spwanPosition)
+				seedService.plantSeed(Player, Tool:GetAttribute("trueName"), spawnPosition)
             end
         end
     end

@@ -4,16 +4,15 @@ local Players = game:GetService("Players")
 local ServerStorage = game:GetService("ServerStorage")
 
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
-local Modules = ReplicatedStorage:WaitForChild("Modules")
+local modules = ReplicatedStorage:WaitForChild("Modules")
 local ServerInfo = ReplicatedStorage:WaitForChild("ServerInfo")
 
-local SeedDataModules = require(Modules:WaitForChild("SeedData"))
+local SeedDataModules = require(modules.SeedData)
 local seedStorage = ServerStorage:WaitForChild("Seeds")
 local cachedModules = require(script.Parent.Parent.Server.CachedModules)
 
 
 local Service = {
-    cachedModules = {},
 }
 
 function Service.removeItem(player: Player, itemName: string, count:number)

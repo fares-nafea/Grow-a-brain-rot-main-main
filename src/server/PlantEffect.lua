@@ -7,7 +7,7 @@ local replicatedStorage = game:GetService("ReplicatedStorage")
 local assets = replicatedStorage:WaitForChild("Assets")
 local plantEffect = assets.PlantEffect
 
-return function(data)
+return function(Data)
     local location: CFrame = Data.Location
 
     local clone = plantEffect:Clone()
