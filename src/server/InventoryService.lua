@@ -8,7 +8,7 @@ local Modules = ReplicatedStorage:WaitForChild("Modules")
 local ServerInfo = ReplicatedStorage:WaitForChild("ServerInfo")
 
 local SeedDataModules = require(Modules:WaitForChild("SeedData"))
-local SeedStorage = ServerStorage:WaitForChild("Seeds")
+local seedStorage = ServerStorage:WaitForChild("Seeds")
 local cachedModules = require(script.Parent.Parent.Server.CachedModules)
 
 
@@ -16,7 +16,58 @@ local Service = {
     cachedModules = {},
 }
 
--- تحديث الأدوات في Inventory
+function Service.removeItem(player: Player, itemName: string, count:number)
+    if player and itemName and count then
+        local dataService = cachedModules.Cache.DataService
+
+        local playerData = dataService.getData(player)
+
+        if playerData then
+            local inventory = playerData.Inventory
+            local foundItem = inventory[itemName]
+
+            if foundItem then
+                local removeItem = false
+
+                if foundItem.Count then
+
+                    foundItem.Count = math.clamp(foundItem.Count-1,0,math.huge)
+                    if foundItem.Count <= 0 then
+                        removeItem = true
+                    else
+                        Service.inventoryUpdated(player, itemName)
+                    end
+                else
+                    removeItem = true
+                end
+                if removeItem then
+                    inventory[itemName] = nil
+
+                    -- looping throuth
+                    local backpack = player.Backpack
+                    local isSeed = seedStorage:FindFirstChild(itemName)
+
+                    if isSeed then
+                        for _,v in backpack:GetChildren() do
+                            if v:GetAttribute("isSeed") == true and v:GetAttribute("trueName") == itemName then
+                                -- destroy
+                                v:Destroy()
+                                break
+                            end
+                        end
+                        local tool = player.Character:FindFirstAncestorWhichIsA("Tool")
+                        if tool then
+                            if isSeed and tool:GetAttribute("isSeed") == true and tool:GetAttribute("trueName") == itemName then
+                                tool:Destroy()
+                            end
+                        end
+                    end
+                    -- add functionality
+                end 
+            end
+        end
+    end
+end
 function Service.createNewTool(player: Player, toolName: string)
     local dataService = cachedModules.Cache.DataService
     local playerData = dataService.getData(player)

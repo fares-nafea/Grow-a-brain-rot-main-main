@@ -19,6 +19,7 @@ local Player: Player = Tool.Parent.Parent
 
 Tool.Activated:Connect(function()
     if Player:FindFirstChild("SeedFrameDebounce") then
+        return
     end
     local playerPlot: Model = plotService.getPlot(Player)
 

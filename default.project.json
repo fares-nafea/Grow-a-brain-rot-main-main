@@ -82,6 +82,15 @@
 
     "StarterPlayer": {
       "$className": "StarterPlayer",
+      "StarterCharacterScripts": {
+        "$className": "StarterCharacterScripts",
+        "SeedToolVisual": {
+          "$path": "src/client/SeedToolVisual.client.lua",
+          "Highlight": {
+            "$className": "Highlight"
+          }
+        }
+      },
 
       "StarterPlayerScripts": {
         "$className": "StarterPlayerScripts",

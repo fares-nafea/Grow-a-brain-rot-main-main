@@ -74,6 +74,8 @@ function Service.plantSeed(player: Player, seedName: string, location: CFrame)
                         return
                     end
 
+                    inventoryService.removeItem(player, seedName, 1)
+
 
 
                     local locationToSave: CFrame = plotService.getPlot(player).ReferencePoint.CFrame:ToObjectSpace(location)
