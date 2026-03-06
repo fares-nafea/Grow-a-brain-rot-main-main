@@ -37,13 +37,14 @@ function Service.getPlot(player: Player)
 end
 
 function Service.getAvailablePlot(player: Player)
-    for _, plot: Model in ipairs(Service.getMaxPlots()) do
-        if plot:GetAttribute("Taken") then
-            continue
-        end
-        return plot
-    end
-    return nil
+	for i = 1, Service.getMaxPlots() do
+		local correspondingPlot: Model = workspace.World.Map.Plots[tostring(i)]
+		if correspondingPlot:GetAttribute("Taken") == true then
+			continue
+		end
+		return correspondingPlot
+	end
+	return nil
 end
 
 function Service.dataLoaded(player: Player)

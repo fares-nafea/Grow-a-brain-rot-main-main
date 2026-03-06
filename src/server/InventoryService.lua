@@ -54,7 +54,7 @@ function Service.removeItem(player: Player, itemName: string, count:number)
                                 break
                             end
                         end
-                        local tool = player.Character:FindFirstAncestorWhichIsA("Tool")
+                        local tool = player.Character:FindFirstChildWhichIsA("Tool")
                         if tool then
                             if isSeed and tool:GetAttribute("isSeed") == true and tool:GetAttribute("trueName") == itemName then
                                 tool:Destroy()

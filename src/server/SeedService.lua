@@ -24,11 +24,11 @@ function Service.isCloseToPlant(referencePoint: Part, plotData: any, locationToP
 	if plotData and locationToPlant and magnitudeThreshold and referencePoint then
 		for plantKey: string, data: any in plotData do
 			-- Converting Saved Location to World Location for Checking
-			local location = CFrame.new( table.unpack(data.Location) )
-			location = referencePoint.CFrame:ToWorldSpace(location)
+            local Location = CFrame.new( table.unpack(data.Location or data.location) )
+            Location = referencePoint.CFrame:ToWorldSpace(Location)
 			--
 			
-			local distance = (location.Position - locationToPlant.Position).Magnitude
+			local distance = (Location.Position - locationToPlant.Position).Magnitude
 			if distance <= magnitudeThreshold then
 				return true
 			end
@@ -96,7 +96,7 @@ function Service.plantSeed(player: Player, seedName: string, location: CFrame, p
                         GrowthPercentage = 0,
                         LastGrowthIncrement = os.time(),
                         DatePlanted = os.time(),
-                        location = { locationToSave:GetComponents() }
+                        Location = { locationToSave:GetComponents() }
                     }
 
                     -- Plant Effect
