@@ -114,7 +114,9 @@ function Service.plantSeed(player: Player, seedName: string, location: CFrame, p
 							end
 						end
 					end)
-                    print(plotData)
+                    
+                    -- Updatind Plot
+                    plotService.updatePlot(player, "seedPlanted", {itemKey = key})
                 end
             end
         end

@@ -1,8 +1,18 @@
 -- PlotService
 
 local players = game:GetService("Players")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+
+
 
 local Service = {}
+
+local modules = replicatedStorage.Modules
+local assets = replicatedStorage.Assets
+
+local seedDataModule = require(modules.SeedData)
+
+local cachedModules = require(script.Parent.Parent.Server.CachedModules)
 
 function Service.locationIsWithinPlot(plot: Model, location: CFrame)
 	if plot and location then
@@ -45,6 +55,44 @@ function Service.getAvailablePlot(player: Player)
 		return correspondingPlot
 	end
 	return nil
+end
+
+function Service.createServerModel(player: Player, key: string, data: any)
+    local dataService = cachedModules.Cache.DataService
+    local playerData = dataService.getData(player)
+
+    local plotData = playerData.PlotData
+    local saveData = plotData[key]
+
+    local trueName = key:split(":")[1]-- Carrot:s5965s
+    local correspondingFolder = assets.Plants:FindFirstChild("trueName")
+
+    local seedData = seedDataModule.getData(trueName.." Seed")
+
+    if cachedModules and saveData and seedData then
+        local serverModel: Model = correspondingFolder.ServerModel:Clone()
+        serverModel.Name = key
+        serverModel:SetAttribute("Owner", player.UserId)
+        serverModel:SetAttribute("Plot", Service.getPlot(player).Name)
+    end
+end
+function Service.updatePlot(player: Player, action: string, data: any)
+    local playerData = cachedModules.Cache.DataService
+    if playerData then
+        if action == "seedPlanted" then
+            local itemKey: string = data.itemKey
+            if itemKey then
+                local newItemData = playerData.PlotData[itemKey]
+
+                if newItemData then
+                    -- Update the Plot With New Item
+                    Service.createServerModel(player, itemKey, newItemData)
+                end
+            end
+        end
+        if action == "fruitHarvested" then
+        end
+    end
 end
 
 function Service.dataLoaded(player: Player)
