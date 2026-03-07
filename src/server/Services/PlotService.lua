@@ -126,7 +126,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
     end
 end
 function Service.updatePlot(player: Player, action: string, data: any)
-    local playerData = cachedModules.Cache.DataService
+    local playerData = cachedModules.Cache.DataService.getData(player)
     if playerData then
         if action == "seedPlanted" then
             local itemKey: string = data.itemKey
