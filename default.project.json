@@ -106,6 +106,12 @@
         },
         "ClientEffects": {
           "$path": "src/client/ClientEffects.client.lua"
+        },
+        "CropReplicator": {
+          "$className": "Folder",
+          "Main": {
+            "$path": "src/client/Main.client.lua"
+          }
         }
       }
     },

@@ -81,7 +81,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
         serrverConfig.GrowthPercentage.Value = data.GrowthPercentage
         serrverConfig.LastGrowthincrement.Value = data.LastGrowthIncrement
 
-        
+
         for index: number, fruitData: any in data.Fruits do
             local fruitConfig = script.FruitConfigTemplate:Clone()
             fruitConfig.Name = tostring(index)
@@ -180,7 +180,20 @@ function Service.playerRemoved(player: Player)
         playerSign.Main.SurfaceGui.TextLabel.Text = "Empty Garden"
         playerSign.Main.SurfaceGui.ImageLabel.ImageTransparency = 1
         playerSign.Main.SurfaceGui.ImageLabel.Image = ""
+
+        -- Claering Plot
+        for _, plant: Model in workspace.World.Map.PlantedSeeds.Server:GetChildren() do
+            if plant:GetAttribute("Owner") == player.UserId then
+                plant:Destroy()
+            end
+        end
+        ---
     end
+end
+
+function Service.init()
+    -- Growing Seed
+    -- Includes Offline Growing
 end
 
 return Service
