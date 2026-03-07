@@ -96,11 +96,11 @@ function Service.plantSeed(player: Player, seedName: string, location: CFrame, p
                         GrowthPercentage = 0,
                         LastGrowthIncrement = os.time(),
                         DatePlanted = os.time(),
-                        Location = { locationToSave:GetComponents() }
+                        Location = { locationToSave:GetComponents() },
+                        Fruits = fruitsArray,
                     }
 
                     -- Plant Effect
-
                     task.spawn(function()
 						-- Raycasting Down to the Ground
 						local rightPlot = plotService.getPlot(player):FindFirstChild("RightSoil")

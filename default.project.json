@@ -335,7 +335,35 @@
         },
 
         "PlotService": {
-          "$path": "src/server/services/PlotService.lua"
+          "$path": "src/server/services/PlotService.lua",
+          "ServerModelConfig": {
+            "$className": "Folder",
+            "Fruits": {
+              "$className": "Folder"
+            },
+            "LastGrowthincrement": {
+              "$className": "IntValue"
+            },
+            "DatePlanted": {
+              "$className": "IntValue"
+            },
+            "GrowthPercentage": {
+              "$className": "NumberValue"
+            }
+            
+          },
+          "FruitConfigTemplate": {
+            "$className": "Folder",
+            "CanHarvest": {
+            "$className": "BoolValue"
+            },
+          "LastHarvest": {
+            "$className": "IntValue"
+            },
+          "Mutations": {
+            "$className": "StringValue"
+            }
+          }
         },
 
         "SeedService": {
