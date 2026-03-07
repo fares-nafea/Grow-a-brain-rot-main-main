@@ -3,8 +3,6 @@
 local players = game:GetService("Players")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 
-
-
 local Service = {}
 
 local modules = replicatedStorage.Modules
@@ -65,7 +63,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
     local saveData = plotData[key]
 
     local trueName = key:split(":")[1]-- Carrot:s5965s
-    local correspondingFolder = assets.Plants:FindFirstChild("trueName")
+    local correspondingFolder = assets.Plants:FindFirstChild(trueName)
 
     local seedData = seedDataModule.getData(trueName.." Seed")
 
@@ -81,7 +79,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
         -- Assigning Configuration Value For Easy Viewing on Client/Server
         serrverConfig.DatePlanted.Value = data.DatePlanted
         serrverConfig.GrowthPercentage.Value = data.GrowthPercentage
-        serrverConfig.LastGrowthIncrement = data.LastGrowthIncrement
+        serrverConfig.LastGrowthincrement.Value = data.LastGrowthincrement
 
         for index: number, fruitData: any in data.Fruits do
             local fruitConfig = script.FruitConfigTemplate:Clone()
@@ -116,6 +114,15 @@ function Service.createServerModel(player: Player, key: string, data: any)
         end
         --------
         serrverConfig.Parent = serverModel
+
+        local deserializeCFrame = CFrame.new(table.unpack(data.Location))
+        deserializeCFrame = CFrame.new(deserializeCFrame.Position)
+
+        -- Converting
+        deserializeCFrame = Service.getPlot(player).ReferencePoint.CFrame:ToWorldSpace(deserializeCFrame)
+
+        serverModel:PivotTo(deserializeCFrame)
+        serverModel.Parent = workspace.World.Map.PlantedSeeds.Server
     end
 end
 function Service.updatePlot(player: Player, action: string, data: any)
@@ -149,9 +156,17 @@ function Service.dataLoaded(player: Player)
         local ImageSize = Enum.ThumbnailSize.Size60x60
         local ImageType = Enum.ThumbnailType.HeadShot
         local content = players:GetUserThumbnailAsync(player.UserId, ImageType, ImageSize)
-
         playerSign.Main.SurfaceGui.ImageLabel.ImageTransparency = 0
         playerSign.Main.SurfaceGui.ImageLabel.Image = content
+
+        -- Loading Plot
+        local plotData = cachedModules.Cache.DataService.getData(player).PlotData
+        task.spawn(function()
+            for Key: string, data: any in plotData do
+                Service.createServerModel(player, Key, data)
+            end
+        end)
+        warn(player, "PlotData", plotData)
     end
 end
 
@@ -160,7 +175,6 @@ function Service.playerRemoved(player: Player)
     if foundPlot then
         foundPlot:SetAttribute("Taken", nil)
         foundPlot:SetAttribute("Owner", nil)
-
         local playerSign: Model = foundPlot.PlayerSign
         playerSign.Main.SurfaceGui.TextLabel.Text = "Empty Garden"
         playerSign.Main.SurfaceGui.ImageLabel.ImageTransparency = 1
