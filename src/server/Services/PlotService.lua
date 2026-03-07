@@ -74,6 +74,48 @@ function Service.createServerModel(player: Player, key: string, data: any)
         serverModel.Name = key
         serverModel:SetAttribute("Owner", player.UserId)
         serverModel:SetAttribute("Plot", Service.getPlot(player).Name)
+
+        local serrverConfig = script.ServerModelConfig:Clone()
+        serrverConfig.Name = "ServerConfiguration"
+
+        -- Assigning Configuration Value For Easy Viewing on Client/Server
+        serrverConfig.DatePlanted.Value = data.DatePlanted
+        serrverConfig.GrowthPercentage.Value = data.GrowthPercentage
+        serrverConfig.LastGrowthIncrement = data.LastGrowthIncrement
+
+        for index: number, fruitData: any in data.Fruits do
+            local fruitConfig = script.FruitConfigTemplate:Clone()
+            fruitConfig.Name = tostring(index)
+            fruitConfig.CanHarvest.Value = fruitData.CanHarvest
+            fruitConfig.LastHarvest.Value = fruitData.LastHarvest
+            fruitConfig.Mutations.Value = fruitConfig.Mutations
+            fruitConfig.Parent = serrverConfig.Fruits
+
+            -- Updating Folder
+            for _,v in fruitConfig:GetChildren() do
+                if not v:IsA("Folder") then
+                    v.Changed:Connect(function()
+                        if seedData.Fruits[index][v.Name] ~= nil then
+                            saveData.Fruits[index][v.Name] = v.Value
+                        end
+                    end)
+                end
+            end
+        end
+
+
+        -- Updating Server Config Folder
+        for _,v in serrverConfig:GetChildren() do
+            if not v:IsA("Folder") then
+                v.Changed(function()
+                    if saveData[v.Name] ~= nil then
+                        saveData[v.Name] = v.Value
+                    end
+                end)
+            end
+        end
+        --------
+        serrverConfig.Parent = serverModel
     end
 end
 function Service.updatePlot(player: Player, action: string, data: any)
