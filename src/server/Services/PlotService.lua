@@ -79,14 +79,15 @@ function Service.createServerModel(player: Player, key: string, data: any)
         -- Assigning Configuration Value For Easy Viewing on Client/Server
         serrverConfig.DatePlanted.Value = data.DatePlanted
         serrverConfig.GrowthPercentage.Value = data.GrowthPercentage
-        serrverConfig.LastGrowthincrement.Value = data.LastGrowthincrement
+        serrverConfig.LastGrowthincrement.Value = data.LastGrowthIncrement
 
+        
         for index: number, fruitData: any in data.Fruits do
             local fruitConfig = script.FruitConfigTemplate:Clone()
             fruitConfig.Name = tostring(index)
             fruitConfig.CanHarvest.Value = fruitData.CanHarvest
             fruitConfig.LastHarvest.Value = fruitData.LastHarvest
-            fruitConfig.Mutations.Value = fruitConfig.Mutations
+            fruitConfig.Mutations.Value = fruitData.Mutations
             fruitConfig.Parent = serrverConfig.Fruits
 
             -- Updating Folder
@@ -105,7 +106,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
         -- Updating Server Config Folder
         for _,v in serrverConfig:GetChildren() do
             if not v:IsA("Folder") then
-                v.Changed(function()
+                v.Changed:Connect(function()
                     if saveData[v.Name] ~= nil then
                         saveData[v.Name] = v.Value
                     end
