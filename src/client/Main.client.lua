@@ -51,7 +51,7 @@ local function harvestableChanged(serverModel: Model, clientModel: Model, fruitN
                                     Size = originalSize,
                                     ["CFrame"] = originalCFrame,
                                     Transparency = 0
-                                })
+                                }):Play()
                             end
                         end
                     end
