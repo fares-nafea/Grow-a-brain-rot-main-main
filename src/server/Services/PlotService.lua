@@ -73,13 +73,13 @@ function Service.createServerModel(player: Player, key: string, data: any)
         serverModel:SetAttribute("Owner", player.UserId)
         serverModel:SetAttribute("Plot", Service.getPlot(player).Name)
 
-        local serrverConfig = script.ServerModelConfig:Clone()
-        serrverConfig.Name = "ServerConfiguration"
+        local serverConfig = script.ServerModelConfig:Clone()
+        serverConfig.Name = "ServerConfiguration"
 
         -- Assigning Configuration Value For Easy Viewing on Client/Server
-        serrverConfig.DatePlanted.Value = data.DatePlanted
-        serrverConfig.GrowthPercentage.Value = data.GrowthPercentage
-        serrverConfig.LastGrowthincrement.Value = data.LastGrowthIncrement
+        serverConfig.DatePlanted.Value = data.DatePlanted
+        serverConfig.GrowthPercentage.Value = data.GrowthPercentage
+        serverConfig.LastGrowthincrement.Value = data.LastGrowthIncrement
 
 
         for index: number, fruitData: any in data.Fruits do
@@ -88,7 +88,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
             fruitConfig.CanHarvest.Value = fruitData.CanHarvest
             fruitConfig.LastHarvest.Value = fruitData.LastHarvest
             fruitConfig.Mutations.Value = fruitData.Mutations
-            fruitConfig.Parent = serrverConfig.Fruits
+            fruitConfig.Parent = serverConfig.Fruits
 
             -- Updating Folder
             for _,v in fruitConfig:GetChildren() do
@@ -106,7 +106,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
         if seedData.MultiHarvest.Value then
             local fruitPrompts = serverModel:FindFirstChild("FruitPrompts")
             if fruitPrompts then
-                for _,v in serrverConfig.Fruits:GetChildren() do
+                for _,v in serverConfig.Fruits:GetChildren() do
                     local correspondingPart: Part = fruitPrompts:FindFirstChild(v.Name)
                     if correspondingPart then
                         local harvestPrompt = script.HarvestPrompt:Clone()
@@ -125,7 +125,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
             harvestPrompt.Parent = serverModel.PrimaryPart
         end
         -- Updating Server Config Folder
-        for _,v in serrverConfig:GetChildren() do
+        for _,v in serverConfig:GetChildren() do
             if not v:IsA("Folder") then
                 v.Changed:Connect(function()
                     if saveData[v.Name] ~= nil then
@@ -135,7 +135,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
             end
         end
         --------
-        serrverConfig.Parent = serverModel
+        serverConfig.Parent = serverModel
 
         local deserializeCFrame = CFrame.new(table.unpack(data.Location))
         deserializeCFrame = CFrame.new(deserializeCFrame.Position)
