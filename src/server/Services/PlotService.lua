@@ -110,8 +110,8 @@ function Service.createServerModel(player: Player, key: string, data: any)
                     local correspondingPart: Part = fruitPrompts:FindFirstChild(v.Name)
                     if correspondingPart then
                         local harvestPrompt = script.HarvestPrompt:Clone()
-                        harvestPrompt.ActhionText = "Harvest"
-                        harvestPrompt.ObjectTet = trueName
+                        harvestPrompt.ActionText = "Harvest"
+                        harvestPrompt.ObjectText = trueName
                         harvestPrompt.Enabled = false
                         harvestPrompt.Parent = correspondingPart
                     end
@@ -119,8 +119,8 @@ function Service.createServerModel(player: Player, key: string, data: any)
             end
         else
             local harvestPrompt = script.HarvestPrompt:Clone()
-            harvestPrompt.ActhionText = "Harvest"
-            harvestPrompt.ObjectTet = trueName
+            harvestPrompt.ActionText = "Harvest"
+            harvestPrompt.ObjectText = trueName
             harvestPrompt.Enabled = false
             harvestPrompt.Parent = serverModel.PrimaryPart
         end
