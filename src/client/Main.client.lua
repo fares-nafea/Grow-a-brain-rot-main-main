@@ -86,7 +86,7 @@ local function childAdded(child: Instance)
             if serverConfig then
                 -- Handling Growth Percentage
                 local growthPercentage = serverConfig:WaitForChild("GrowthPercentage", math.huge)
-                growthPercentage.Changed(function()
+                growthPercentage.Changed:Connect(function()
                     growthPercentageUpdate(clientModel, growthPercentage.Value)
                 end)
                 growthPercentageUpdate(clientModel, growthPercentage.Value)

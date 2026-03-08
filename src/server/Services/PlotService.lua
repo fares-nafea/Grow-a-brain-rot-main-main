@@ -1,5 +1,6 @@
 -- PlotService
 
+local ServerScriptService = game:GetService("ServerScriptService")
 local players = game:GetService("Players")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 
@@ -102,6 +103,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
             end
         end
 
+        -- Creating ProximityPrompts
 
         -- Updating Server Config Folder
         for _,v in serrverConfig:GetChildren() do
@@ -194,6 +196,78 @@ end
 function Service.init()
     -- Growing Seed
     -- Includes Offline Growing
+
+    local dataService = cachedModules.Cache.DataService
+
+    task.spawn(function()
+        while task.wait(1) do
+            for _, crop: Model in workspace.World.Map.PlantedSeeds.Server:GetChildren() do
+                local plotNumber = crop:GetAttribute("Plot")
+                local owner = crop:GetAttribute("Owner")
+
+                local player = players:GetPlayerByUserId(owner)
+                if not player then
+                    continue
+                end
+                local playerData = dataService.getData(player)
+
+                local serverConfig = crop:FindFirstChild("ServerConfiguration")
+                if serverConfig then
+                    local growthPercentage = serverConfig.GrowthPercentage
+                    local lastGrowthincrement = serverConfig.LastGrowthincrement
+                    local datePlanted = serverConfig.DatePlanted
+
+                    local seedName = crop.Name:split(":")[1].." Seed"
+                    local foundSeed = seedDataModule.getData(seedName)
+
+                    local harvestInterval = foundSeed.HarvestInterval.Value
+
+                    if plotNumber and owner and foundSeed then
+
+                        if growthPercentage.Value >= 100 then
+                            -- Harvest Seed Part
+
+                            if foundSeed.MultiHarvesr.Value then
+                                -- Multi Harvest Crop
+                                task.spawn(function()
+                                    for _, fruit in serverConfig.Fruits:GetChildren() do
+                                        local lastHarvest = fruit.LastHarvest
+                                        local canHarvest = fruit.CanHarvest
+                                        local mutations = fruit.Mutations
+
+                                        if os.time()-lastHarvest.Value >= harvestInterval then
+                                            canHarvest.Value = true
+                                        else
+                                            canHarvest.Value = false
+                                        end
+                                    end
+                                end)
+                            else
+                                -- Single Harvest Crop
+                                local folder = serverConfig.Fruits["1"]
+                                if folder.CanHarvest.Value then
+                                    continue
+                                end
+                                folder.CanHarvest.Value = true
+                            end
+
+                        else
+                            local growthTime = foundSeed.GrowthTime.Value
+                            if os.time()-lastGrowthincrement.Value >= 1 then
+                                -- Increment
+                                lastGrowthincrement.Value = os.time()
+                                growthPercentage.Value = math.clamp(
+                                    ((os.time()-datePlanted.Value)/growthTime)*100,
+                                    0,
+                                    100
+                                )
+                            end
+                        end
+                    end
+                end
+            end
+        end   
+    end)
 end
 
 return Service
