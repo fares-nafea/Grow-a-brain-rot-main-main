@@ -1,6 +1,5 @@
 -- PlotService
 
-local ServerScriptService = game:GetService("ServerScriptService")
 local players = game:GetService("Players")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 
@@ -95,16 +94,36 @@ function Service.createServerModel(player: Player, key: string, data: any)
             for _,v in fruitConfig:GetChildren() do
                 if not v:IsA("Folder") then
                     v.Changed:Connect(function()
-                        if seedData.Fruits[index][v.Name] ~= nil then
-                            saveData.Fruits[index][v.Name] = v.Value
-                        end
+                        if saveData.Fruits[index][v.Name] ~= nil then
+							saveData.Fruits[index][v.Name] = v.Value
+						end
                     end)
                 end
             end
         end
 
         -- Creating ProximityPrompts
-
+        if seedData.MultiHarvest.Value then
+            local fruitPrompts = serverModel:FindFirstChild("FruitPrompts")
+            if fruitPrompts then
+                for _,v in serrverConfig.Fruits:GetChildren() do
+                    local correspondingPart: Part = fruitPrompts:FindFirstChild(v.Name)
+                    if correspondingPart then
+                        local harvestPrompt = script.HarvestPrompt:Clone()
+                        harvestPrompt.ActhionText = "Harvest"
+                        harvestPrompt.ObjectTet = trueName
+                        harvestPrompt.Enabled = false
+                        harvestPrompt.Parent = correspondingPart
+                    end
+                end
+            end
+        else
+            local harvestPrompt = script.HarvestPrompt:Clone()
+            harvestPrompt.ActhionText = "Harvest"
+            harvestPrompt.ObjectTet = trueName
+            harvestPrompt.Enabled = false
+            harvestPrompt.Parent = serverModel.PrimaryPart
+        end
         -- Updating Server Config Folder
         for _,v in serrverConfig:GetChildren() do
             if not v:IsA("Folder") then
@@ -227,7 +246,7 @@ function Service.init()
                         if growthPercentage.Value >= 100 then
                             -- Harvest Seed Part
 
-                            if foundSeed.MultiHarvesr.Value then
+                            if foundSeed.MultiHarvest.Value then
                                 -- Multi Harvest Crop
                                 task.spawn(function()
                                     for _, fruit in serverConfig.Fruits:GetChildren() do

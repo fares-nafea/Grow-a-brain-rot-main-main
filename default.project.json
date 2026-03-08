@@ -342,6 +342,9 @@
 
         "PlotService": {
           "$path": "src/server/services/PlotService.lua",
+          "HarvestPrompt": {
+            "$className": "ProximityPrompt"
+          },
           "ServerModelConfig": {
             "$className": "Folder",
             "Fruits": {
