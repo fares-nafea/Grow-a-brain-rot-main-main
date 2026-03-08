@@ -21,6 +21,54 @@ repeat task.wait() until player:GetAttribute("DataLoaded") == true
 
 task.wait(1)
 
+local function harvestableChanged(serverModel: Model, clientModel: Model, fruitNumber: string, harvestable: boolean, MultiHarvest: boolean)
+    task.spawn(function()
+        if harvestable == true then
+            if clientFolder:GetAttribute("FullyGrown") == false then
+                repeat task.wait() until clientModel:GetAttribute("FullyGrown") == true
+
+                -- Enabling Prmopt
+                task.spawn(function()
+                    if MultiHarvest then
+                        serverModel.FruitPrmopts[fruitNumber].HarvestPrompt.Enabled = true
+                    else
+                        serverModel["PrimaryPart"].HarvestPrompt.Enabled = true
+                    end
+                end)
+                task.spawn(function()
+                    for _,v in clientModel:GetDescendants() do
+                        local isTweened = v:GetAttribute("isTweened")
+                        local originalSize = v:GetAttribute("OriginalSize")
+                        local originalCFrame = v:GetAttribute("OriginalCFrame")
+
+                        if isTweened ~= nil and originalSize then
+                            if isTweened then
+                                continue
+                            end
+                            if v:GetAttribute("FruitNumber") == tonumber(fruitNumber) then
+                                v:SetAttribute("IsTweened", true)
+                                tweenService:Create(v, TweenInfo.new(1, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                                    Size = originalSize,
+                                    ["CFrame"] = originalCFrame,
+                                    Transparency = 0
+                                })
+                            end
+                        end
+                    end
+                end)
+            end
+        else
+            -- Disabling Prompt
+            task.spawn(function()
+                if MultiHarvest then
+                    serverModel.FruitPrmopts[fruitNumber].HarvestPrompt.Enabled = false
+                else
+                    serverModel["PrimaryPart"].HarvestPrompt.Enabled = false
+                end
+            end)
+        end
+    end)
+end
 local function growthPercentageUpdate(clientModel: Model, newValue: number)
     task.spawn(function()
         for _,v in clientModel:GetDescendants() do
@@ -90,6 +138,36 @@ local function childAdded(child: Instance)
                     growthPercentageUpdate(clientModel, growthPercentage.Value)
                 end)
                 growthPercentageUpdate(clientModel, growthPercentage.Value)
+
+                -- Handling Harvest Visual
+                local seed_data = seedModule.getData(trueName.." Seed")
+                if seed_data then
+                    local fruitsFolder = serverConfig.Fruits
+                    for _,v in fruitsFolder:GetChildren() do
+                        if seed_data.MultiHarvest.Value then
+                            local foundModel = clientModel:FindFirstChild("fruit_"..tostring(v.Name))
+                            if foundModel then
+                                local objectValue = Instance.new("ObjectValue")
+                                objectValue.Name = "CorrespondingAdornee"
+                                objectValue.Value = foundModel
+                                objectValue.Parent = child.FruitPrompts:WaitForChild(tostring(v.Name)).HarvestPrompt
+                            end
+                        else
+                            local objectValue = Instance.new("ObjectValue")
+                            objectValue.Name = "CorrespondingAdornee"
+                            objectValue.Value = clientModel
+                            objectValue.Parent = child.PrimaryPart:WaitForChild("HarvestPrompt")
+                        end
+                        -- Handling Visibilty of Prompt
+                        local canHarvest = v:FindFirstChild("CanHarvest")
+                        if canHarvest ~= nil then
+                            canHarvest.Changed:Connect(function()
+                            end)
+                            if canHarvest.Value then
+                            end
+                        end
+                    end
+                end
             end
         end
     end
