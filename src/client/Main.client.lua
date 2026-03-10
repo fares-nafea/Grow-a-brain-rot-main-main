@@ -46,7 +46,7 @@ local function harvestableChanged(serverModel: Model, clientModel: Model, fruitN
                                 continue
                             end
                             if v:GetAttribute("FruitNumber") == tonumber(fruitNumber) then
-                                v:SetAttribute("IsTweened", true)
+                                v:SetAttribute("isTweened", true)
                                 tweenService:Create(v, TweenInfo.new(1, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
                                     Size = originalSize,
                                     ["CFrame"] = originalCFrame,
@@ -72,29 +72,22 @@ end
 local function growthPercentageUpdate(clientModel: Model, newValue: number)
     task.spawn(function()
         for _,v in clientModel:GetDescendants() do
-            local isTweened = v:GetAttribute("IsTweened")
+            local isTweened = v:GetAttribute("isTweened")
             local originalSize = v:GetAttribute("OriginalSize")
-            local appearPercentage = v:GetAttribute("AppearPercentage")
             local originalCFrame = v:GetAttribute("OriginalCFrame")
-
-            task.spawn(function()
-                if isTweened ~= nil and originalSize and appearPercentage then
-                    if isTweened == false then
-                        if newValue >= appearPercentage then
-                            v:SetAttribute("IsTweened", true)
-                            tweenService:Create(v, TweenInfo.new(1, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-                                Size = originalSize,
-                                ["CFrame"] = originalCFrame,
-                                Transparency = 0
-                            }):Play()
-                        end
-                    end
+            if isTweened ~= nil and originalSize then
+                if isTweened then
+                    continue
                 end
-            end)
-            task.wait(.05)
-        end
-        if newValue >= 100 then
-            clientModel:SetAttribute("FullyGrown", true)
+                if v:GetAttribute("FruitNumber") == tonumber(fruitNumber) then
+                    v:SetAttribute("isTweened", false)
+                    tweenService:Create(v, TweenInfo.new(1, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                    Size = Vector3.new(.01,.01,.01),
+                    ["CFrame"] = clientModel:GetPivot(),
+                    Transparency = 1
+                    }):Play()
+                end
+            end
         end
     end)
 end
@@ -121,7 +114,7 @@ local function childAdded(child: Instance)
                     v.Transparency = 1
                     v:SetAttribute("OriginalSize", v.Size)
                     v:SetAttribute("OriginalCFrame", v.CFrame)
-                    v:SetAttribute("IsTweened", false)
+                    v:SetAttribute("isTweened", false)
                     v.Size = Vector3.new(.01,.01,.01)
                     v.CFrame = clientModel:GetPivot()
                 end
