@@ -30,11 +30,9 @@ function Service.locationIsWithinPlot(plot: Model, location: CFrame)
 	end
 	return false
 end
-
 function Service.getMaxPlots()
     return #workspace.World.Map.Plots:GetChildren()
 end
-
 function Service.getPlot(player: Player)
     for _, plot: Model in workspace.World.Map.Plots:GetChildren() do
         if plot:GetAttribute("Taken") == true and plot:GetAttribute("Owner") == player.UserId then
@@ -43,7 +41,6 @@ function Service.getPlot(player: Player)
     end
     return nil
 end
-
 function Service.getAvailablePlot(player: Player)
 	for i = 1, Service.getMaxPlots() do
 		local correspondingPlot: Model = workspace.World.Map.Plots[tostring(i)]
@@ -54,7 +51,6 @@ function Service.getAvailablePlot(player: Player)
 	end
 	return nil
 end
-
 function Service.createServerModel(player: Player, key: string, data: any)
     local dataService = cachedModules.Cache.DataService
     local playerData = dataService.getData(player)
@@ -245,7 +241,6 @@ function Service.init()
 
                         if growthPercentage.Value >= 100 then
                             -- Harvest Seed Part
-
                             if foundSeed.MultiHarvest.Value then
                                 -- Multi Harvest Crop
                                 task.spawn(function()
