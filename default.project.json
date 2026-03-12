@@ -9,11 +9,25 @@
 
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
-
       "ServerInfo": {
         "$className": "Folder",
         "SEED_RESTOCK_TIMER": {
           "$className": "IntValue"
+        }
+      },
+      "Assets": {
+        "$className": "Folder",
+        "Crops": {
+          "$className": "Folder"
+        },
+        "Plants": {
+          "$className": "Folder",
+          "PlantEffect": {
+            "$className": "Model",
+            "PrimaryPart": {
+              "$className": "Part"
+            }
+          }
         }
       },
 
