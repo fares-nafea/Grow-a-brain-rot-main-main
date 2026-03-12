@@ -20,14 +20,33 @@
         "Crops": {
           "$className": "Folder"
         },
-        "Plants": {
-          "$className": "Folder",
-          "PlantEffect": {
+        "Part": {
+          "$className": "Part"
+        },
+        "Part ": {
+          "$className": "Part"
+        },
+        "PlantEffect": {
             "$className": "Model",
             "PrimaryPart": {
               "$className": "Part"
-            }
           }
+        },
+        "Plants": {
+          "$className": "Folder",
+          "Blueberry": {
+            "$className": "Folder"
+          },
+          "Cacao": {
+            "$className": "Folder"
+          },
+          "Carrot": {
+            "$className": "Folder"
+          },
+          "Tomato": {
+            "$className": "Folder"
+          }
+
         }
       },
 
