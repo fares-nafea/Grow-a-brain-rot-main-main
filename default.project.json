@@ -317,16 +317,52 @@
             }
           },
           "ClientModel": {
+            "$className": "Model",
             "1": {
               "$className": "Part"
             },
             "2": {
               "$className": "Part"
             },
-            "4": {
+            "3": {
               "$className": "Part"
             },
-            "$className": "Model",
+            "4": {
+              "$className": "Part",
+              "Weld": {
+                "$className": "Weld"
+              }
+            },
+            "5": {
+              "$className": "Part",
+              "Weld": {
+                "$className": "Weld"
+              }
+            },
+            "6": {
+              "$className": "Part",
+              "Weld": {
+                "$className": "Weld"
+              }
+            },
+            "7": {
+              "$className": "Part",
+              "Weld": {
+                "$className": "Weld"
+              }
+            },
+            "8": {
+              "$className": "Part",
+              "Weld": {
+                "$className": "Weld"
+              }
+            },
+            "9": {
+              "$className": "Part",
+              "Weld": {
+                "$className": "Weld"
+              }
+            },
             "PrimaryPart": {
               "$className": "Part"
             }
@@ -695,6 +731,9 @@
               "Part8": {
                 "$className": "Part"
               }
+            },
+            "PrimaryPart": {
+              "$className": "Part"
             }
           }
         },
