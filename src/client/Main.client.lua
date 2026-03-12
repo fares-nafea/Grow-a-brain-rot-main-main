@@ -131,7 +131,24 @@ local function childAdded(child: Instance)
 				growthPercentageUpdate(clientModel, growthPercentage.Value)
 
 				local seed_data = seedModule.getData(trueName.. " Seed")
-
+				-- Handling Scaling
+				task.spawn(function()
+					if seed_data then
+						local fruitsFolder = serverConfig.Fruits
+						if not seed_data.MultiHarvest.Value then return end 
+						for _,v in fruitsFolder:GetChildren() do
+							-- scale fruits
+							local foundModel = clientModel:FindFirstChild("fruit_"..tostring(v.Name))
+							local sizeScaling = v:FindFirstChild("SizeScaling")
+							if foundModel and sizeScaling then
+								foundModel:ScaleTo(sizeScaling.Value)
+								sizeScaling.Changed:Connect(function()
+									foundModel:ScaleTo(sizeScaling.Value)
+								end)
+							end
+						end
+					end
+				end)
 				-- Handling Harvest Visual
 				if seed_data then
 					local fruitsFolder = serverConfig.Fruits

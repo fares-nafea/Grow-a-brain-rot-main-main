@@ -45,7 +45,7 @@ Tool.Activated:Connect(function()
                 local mockPlantModel = plantModel.ServerModel:Clone()
 
                 -- Gatting Final Plant Scaling
-                local PlantSize = seedService.getRandomPlantSize(Tool.Name, { })
+                local PlantSize = seedService.getRandomPlantSize(Tool.Name, {})
                 ---
                 mockPlantModel:ScaleTo(PlantSize)
 
@@ -61,7 +61,7 @@ Tool.Activated:Connect(function()
 				)
 				spawnPosition = CFrame.new(spawnPosition)
 
-                mockPlantModel:Destroy( )
+                mockPlantModel:Destroy()
 
 				seedService.plantSeed(Player, Tool:GetAttribute("trueName"), spawnPosition, PlantSize )
             end
