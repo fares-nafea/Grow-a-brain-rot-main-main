@@ -17,7 +17,7 @@ local Service = {
 }
 
 function Service.getRandomPlantSize(name: string, axtraData: any)
-    return Random.new():NextNumber(1,3 )
+    return Random.new():NextNumber(1,6)
 end
 function Service.getRandomFruitSize(name: string, axtraData: any)
     if name == "Carrot Seed" then
