@@ -759,6 +759,42 @@
             "fruit_1": {
               "$className": "Model",
               "EffectPart": {
+                "$className": "Part",
+                "Weld": {
+                  "$className": "Weld"
+                }
+              },
+              "Part1": {
+                "$className": "Part",
+                "Weld": {
+                  "$className": "Weld"
+                }
+              },
+              "Part2": {
+                "$className": "Part",
+                "Weld": {
+                  "$className": "Weld"
+                }
+              },
+              "Part3": {
+                "$className": "Part"
+              },
+              "Part4": {
+                "$className": "Part"
+              },
+              "Part5": {
+                "$className": "Part"
+              },
+              "Part6": {
+                "$className": "Part"
+              },
+              "Part7": {
+                "$className": "Part"
+              },
+              "Part8": {
+                "$className": "Part"
+              },
+              "Part9": {
                 "$className": "Part"
               },
               "PrimaryPart": {
@@ -768,6 +804,42 @@
             "fruit_2": {
               "$className": "Model",
               "EffectPart": {
+                "$className": "Part",
+                "Weld": {
+                  "$className": "Weld"
+                }
+              },
+              "Part1": {
+                "$className": "Part",
+                "Weld": {
+                  "$className": "Weld"
+                }
+              },
+              "Part2": {
+                "$className": "Part",
+                "Weld": {
+                  "$className": "Weld"
+                }
+              },
+              "Part3": {
+                "$className": "Part"
+              },
+              "Part4": {
+                "$className": "Part"
+              },
+              "Part5": {
+                "$className": "Part"
+              },
+              "Part6": {
+                "$className": "Part"
+              },
+              "Part7": {
+                "$className": "Part"
+              },
+              "Part8": {
+                "$className": "Part"
+              },
+              "Part9": {
                 "$className": "Part"
               },
               "PrimaryPart": {
@@ -775,7 +847,37 @@
               }
             },
             "Model": {
-              "$className": "Model"
+              "$className": "Model",
+              "Part1": {
+                "$className": "Part"
+              },
+              "Part2": {
+                "$className": "Part"
+              },
+              "Part3": {
+                "$className": "Part"
+              },
+              "Part4": {
+                "$className": "Part"
+              },
+              "Part5": {
+                "$className": "Part"
+              },
+              "Part6": {
+                "$className": "Part",
+                "Weld": {
+                  "$className": "Weld"
+                }
+              },
+              "Part7": {
+                "$className": "Part"
+              },
+              "Part8": {
+                "$className": "Part"
+              },
+              "Part9": {
+                "$className": "Part"
+              }
             },
             "PrimaryPart": {
               "$className": "Part"
