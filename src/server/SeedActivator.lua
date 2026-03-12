@@ -1,6 +1,6 @@
 -- SeedActivator
 --[[
-   Used for handling tools
+	Used for handling tools
 ]]
 
 local debris = game:GetService("Debris")
@@ -28,45 +28,47 @@ Tool.Activated:Connect(function()
 	db.Name = "SeedPlantDebounce"
 	db.Parent = Player
 	debris:AddItem(db, .5)
-
-    if playerPlot then
-        local mouseCFrame = remotes.GetMouseCF:InvokeClient(Player)
-
-        if mouseCFrame then
-            if not plotService.locationIsWithinPlot(playerPlot, mouseCFrame) then
-                return
-            end
-            -- Getting Seed Offset Form the Ground 
-            local plantModel = replicatedStorage.Assets.Plants:FindFirstChild(
+	
+	if playerPlot then
+		local mouseCFrame = remotes.GetMouseCF:InvokeClient(Player)
+		
+		if mouseCFrame then			
+			if not plotService.locationIsWithinPlot(playerPlot, mouseCFrame) then
+				return
+			end
+			
+			-- Getting Seed Offset From the Ground
+			local plantModel = replicatedStorage.Assets.Plants:FindFirstChild(
 				Tool:GetAttribute("trueName"):split(" ")[1]
-            )
-
-            if plantModel then
-                local mockPlantModel = plantModel.ServerModel:Clone()
-
-                -- Gatting Final Plant Scaling
-                local PlantSize = seedService.getRandomPlantSize(Tool.Name, {})
-                ---
-                mockPlantModel:ScaleTo(PlantSize)
-
-                local plotCFrame, plotSize = playerPlot.RightSoil:GetBoundingBox()
-
-                local plotTopY = plotCFrame.Position.Y + plotSize.Y/2
-                local plantHeightOFfset = mockPlantModel.PrimaryPart.Size.Y/2
-
-                local spawnPosition = Vector3.new(
+			)
+			
+			if plantModel then
+				local mockPlantModel = plantModel.ServerModel:Clone()
+				
+				-- Getting Final Plant Scaling when the plant is fully gornw
+				local PlantSize = seedService.getRandomPlantSize(Tool.Name, {})
+				---
+				
+				mockPlantModel:ScaleTo(PlantSize)
+				
+				local plotCFrame, plotSize = playerPlot.RightSoil:GetBoundingBox()
+				
+				local plotTopY = plotCFrame.Position.Y + plotSize.Y/2
+				local plantHeightOFfset = mockPlantModel.PrimaryPart.Size.Y/2
+				
+				local spawnPosition = Vector3.new(
 					mouseCFrame.Position.X,
 					plotTopY+plantHeightOFfset,
 					mouseCFrame.Position.Z
 				)
 				spawnPosition = CFrame.new(spawnPosition)
-
-                mockPlantModel:Destroy()
-
-				seedService.plantSeed(Player, Tool:GetAttribute("trueName"), spawnPosition, PlantSize )
-            end
-        end
-    end
+				
+				mockPlantModel:Destroy()
+				
+				seedService.plantSeed(Player, Tool:GetAttribute("trueName"), spawnPosition, PlantSize)
+			end
+		end
+	end
 end)
 
 return Activator

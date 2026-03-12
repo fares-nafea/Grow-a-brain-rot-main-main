@@ -938,7 +938,10 @@
             "$className": "RemoteFunction"
         },
         "ClientEffects": {
-            "$className": "RemoteEvent"
+          "$className": "RemoteEvent"
+        },
+        "Harvest": {
+          "$className": "RemoteEvent"
         }
       },
 
@@ -949,6 +952,9 @@
           "PlantEffect": {
             "$path": "src/server/PlantEffect.lua"
           }
+        },
+        "FruitNameParse": {
+          "$path": "src/server/FruitNameParse.lua"
         },
         "SeedData": {
           "$path": "src/server/SeedData.lua",
@@ -1331,6 +1337,9 @@
 
         "SeedService": {
           "$path": "src/server/SeedService.lua"
+        },
+        "HarvestService": {
+          "$path": "src/server/HarvestService.lua"
         },
         "InventoryService": {
           "$path": "src/server/InventoryService.lua",
