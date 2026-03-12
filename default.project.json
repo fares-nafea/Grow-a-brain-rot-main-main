@@ -353,6 +353,9 @@
             "LastGrowthincrement": {
               "$className": "NumberValue"
             },
+            "PlantSize": {
+              "$className": "NumberValue"
+            },
             "DatePlanted": {
               "$className": "IntValue"
             },
@@ -368,6 +371,9 @@
             },
           "LastHarvest": {
             "$className": "IntValue"
+            },
+            "SizeScaling": {
+              "$className": "NumberValue"
             },
           "Mutations": {
             "$className": "StringValue"

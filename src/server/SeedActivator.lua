@@ -42,12 +42,17 @@ Tool.Activated:Connect(function()
             )
 
             if plantModel then
-                plantModel = plantModel.ServerModel
+                local mockPlantModel = plantModel.ServerModel:Clone()
+
+                -- Gatting Final Plant Scaling
+                local PlantSize = seedService.getRandomPlantSize(Tool.Name, { })
+                ---
+                mockPlantModel:ScaleTo(PlantSize)
 
                 local plotCFrame, plotSize = playerPlot.RightSoil:GetBoundingBox()
 
                 local plotTopY = plotCFrame.Position.Y + plotSize.Y/2
-                local plantHeightOFfset = plantModel.PrimaryPart.Size.Y/2
+                local plantHeightOFfset = mockPlantModel.PrimaryPart.Size.Y/2
 
                 local spawnPosition = Vector3.new(
 					mouseCFrame.Position.X,
@@ -56,7 +61,9 @@ Tool.Activated:Connect(function()
 				)
 				spawnPosition = CFrame.new(spawnPosition)
 
-				seedService.plantSeed(Player, Tool:GetAttribute("trueName"), spawnPosition)
+                mockPlantModel:Destroy( )
+
+				seedService.plantSeed(Player, Tool:GetAttribute("trueName"), spawnPosition, PlantSize )
             end
         end
     end

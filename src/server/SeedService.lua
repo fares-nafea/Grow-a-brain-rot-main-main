@@ -16,6 +16,15 @@ local Service = {
 	DEFAULT_RESTOCK_TIME = 5,
 }
 
+function Service.getRandomPlantSize(name: string, axtraData: any)
+    Random.new():NextNumber(1,3 )
+end
+function Service.getRandomFruitSize(name: string, axtraData: any)
+    if name == "Carrot Seed" then
+        return 1
+    end
+    return Random.new():NextNumber(1, 3)
+end
 function Service.generateKey(prefix: string)
 	return prefix..":"..string.sub(httpService:GenerateGUID(false),1,5)
 	-- "Carrot:12kd5"
@@ -89,7 +98,12 @@ function Service.plantSeed(player: Player, seedName: string, location: CFrame, p
 
                     local fruitsArray = {}
 					for i = 1, seedData.HarvestCount.Value do
-                        fruitsArray[i] = {CanHarvest = false, LastHarvest = os.time(), Mutations = ""}
+                        fruitsArray[i] = {
+                            CanHarvest = false, 
+                            LastHarvest = os.time(), 
+                            Mutations = "",
+                            SizeScaling = Service.getRandomFruitSize(seedName, {})
+                        }
                     end
 
                     plotData[key] = {
@@ -98,8 +112,9 @@ function Service.plantSeed(player: Player, seedName: string, location: CFrame, p
                         DatePlanted = os.time(),
                         Location = { locationToSave:GetComponents() },
                         Fruits = fruitsArray,
+                        ["PlantSize"] = plantScaling or 1 
                     }
-
+ 
                     -- Plant Effect
                     task.spawn(function()
 						-- Raycasting Down to the Ground
