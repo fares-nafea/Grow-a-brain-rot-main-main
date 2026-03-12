@@ -17,15 +17,295 @@
       },
       "Assets": {
         "$className": "Folder",
-        "Crops": {
-          "$className": "Folder"
-        },
         "PlantEffect": {
         "$className": "Model",
         "PrimaryPart": {
           "$className": "Part"
         }
       },
+      "Part1": {
+        "$className": "Part",
+        "RainbowEffect": {
+          "$className": "Attachment",
+          "ParticleEmitter": {
+            "$className": "ParticleEmitter"
+          },
+          "Shards": {
+            "$className": "ParticleEmitter"
+          },
+          "Squares": {
+            "$className": "ParticleEmitter"
+          },
+          "Star2": {
+            "$className": "ParticleEmitter"
+          },
+          "USING": {
+            "$className": "ParticleEmitter"
+          },
+          "flares": {
+            "$className": "ParticleEmitter"
+          }
+        }
+      },
+      "Part2": {
+        "$className": "Part",
+        "GoldMutationEffect": {
+          "$className": "Attachment",
+          "ParticleEmitter": {
+            "$className": "ParticleEmitter"
+          },
+          "flares": {
+            "$className": "ParticleEmitter"
+          }
+        }
+      },
+      "Crops": {
+        "$className": "Folder",
+        "Blueberry": {
+          "$className": "Tool",
+          "Handle": {
+            "$className": "Part",
+            "Part1": {
+              "$className": "Motor6D"
+            },
+            "Part2": {
+              "$className": "Motor6D"
+            },
+            "Part3": {
+              "$className": "Motor6D"
+            },
+            "Part4": {
+              "$className": "Motor6D"
+            }
+          },
+          "Part1": {
+            "$className": "Part"
+          },
+          "Part2": {
+            "$className": "Part"
+          },"Part3": {
+            "$className": "Part"
+          },"Part4": {
+            "$className": "Part"
+          }
+        },
+        "Cacao": {
+          "$className": "Tool",
+          "Handle": {
+            "$className": "Part",
+            "Part1": {
+              "$className": "Motor6D"
+            },
+            "Part2": {
+              "$className": "Motor6D"
+            },
+            "Part3": {
+              "$className": "Motor6D"
+            },
+            "Part4": {
+              "$className": "Motor6D"
+            },
+            "Part5": {
+              "$className": "Motor6D"
+            },
+            "Part6": {
+              "$className": "Motor6D"
+            },
+            "Part7": {
+              "$className": "Motor6D"
+            },
+            "Part8": {
+              "$className": "Motor6D"
+            },
+            "Part9": {
+              "$className": "Motor6D"
+            }
+          },
+          "Part1": {
+            "$className": "Part"
+          },
+          "Part2": {
+            "$className": "Part"
+          },
+          "Part3": {
+            "$className": "Part"
+          },
+          "Part4": {
+            "$className": "Part"
+          },
+          "Part5": {
+            "$className": "Part"
+          },
+          "Part6": {
+            "$className": "Part"
+          },
+          "Part7": {
+            "$className": "Part"
+          },
+          "Part8": {
+            "$className": "Part"
+          },
+          "Part9": {
+            "$className": "Part"
+          }
+      },
+        "Carrot": {
+          "$className": "Tool",
+          "Handle": {
+            "$className": "Part",
+            "Part1": {
+              "$className": "Motor6D"
+            },
+            "Part2": {
+              "$className": "Motor6D"
+            },
+            "Part3": {
+              "$className": "Motor6D"
+            },
+            "Part4": {
+              "$className": "Motor6D"
+            },
+            "Part5": {
+              "$className": "Motor6D"
+            },
+            "Part6": {
+              "$className": "Motor6D"
+            },
+            "Part7": {
+              "$className": "Motor6D"
+            },
+            "Part8": {
+              "$className": "Motor6D"
+            },
+            "Part9": {
+              "$className": "Motor6D"
+            }
+          },
+          "Part1": {
+            "$className": "Part"
+          },
+          "Part2": {
+            "$className": "Part"
+          },
+          "Part3": {
+            "$className": "Part"
+          },
+          "Part4": {
+            "$className": "Part",
+            "Weld": {
+              "$className": "Weld"
+            },
+            "Weld2": {
+              "$className": "Weld"
+            }
+          },
+          "Part5": {
+            "$className": "Part",
+            "Weld": {
+              "$className": "Weld"
+            }
+          },
+          "Part6": {
+            "$className": "Part",
+            "Weld": {
+              "$className": "Weld"
+            }
+          },
+          "Part7": {
+            "$className": "Part",
+            "Weld1": {
+              "$className": "Weld"
+            },
+            "Weld2": {
+              "$className": "Weld"
+            },
+            "Weld3": {
+              "$className": "Weld"
+            }
+          },
+          "Part8": {
+            "$className": "Part"
+          },
+          "Part9": {
+            "$className": "Part"
+          }
+        },
+        "Tomato": {
+          "$className": "Tool",
+          "Handle": {
+            "$className": "Part",
+            "Part1": {
+              "$className": "Motor6D"
+            },
+            "Part2": {
+              "$className": "Motor6D"
+            },
+            "Part3": {
+              "$className": "Motor6D"
+            },
+            "Part4": {
+              "$className": "Motor6D"
+            },
+            "Part5": {
+              "$className": "Motor6D"
+            },
+            "Part6": {
+              "$className": "Motor6D"
+            },
+            "Part7": {
+              "$className": "Motor6D"
+            },
+            "Part8": {
+              "$className": "Motor6D"
+            },
+            "Part9": {
+              "$className": "Motor6D"
+            },
+            "Part10": {
+              "$className": "Motor6D"
+            }
+          },
+          "Part1": {
+            "$className": "Part"
+          },
+          "Part2": {
+            "$className": "Part"
+          },
+          "Part3": {
+            "$className": "Part"
+          },
+          "Part4": {
+            "$className": "Part",
+            "Weld": {
+              "$className": "Weld"
+            }
+          },
+          "Part5": {
+            "$className": "Part",
+            "Weld": {
+              "$className": "Weld"
+            }
+          },
+          "Part6": {
+            "$className": "Part",
+            "Weld": {
+              "$className": "Weld"
+            }
+          },
+          "Part7": {
+            "$className": "Part"
+          },
+          "Part8": {
+            "$className": "Part"
+          },
+          "Part9": {
+            "$className": "Part"
+          },
+          "Part10": {
+            "$className": "Part"
+          }
+      }
+        },
       "Plants": {
         "$className": "Folder",
         "Carrot": {
@@ -225,33 +505,6 @@
         }
       }
       },
-      "Crops": {
-        "$className": "Folder",
-        "Blueberry": {
-          "$className": "Tool",
-          "Handle": {
-            "$className": "Part"
-          }
-        },
-        "Cacao": {
-          "$className": "Tool",
-          "Handle": {
-            "$className": "Part"
-          }
-        },
-        "Carrot": {
-          "$className": "Tool",
-          "Handle": {
-            "$className": "Part"
-          }
-        },
-        "Tomato": {
-          "$className": "Tool",
-          "Handle": {
-            "$className": "Part"
-          }
-        }
-      },
       "RainbowEffectPart": {
         "$className": "Part",
         "RainbowEffect": {
@@ -313,6 +566,42 @@
         "SeedData": {
           "$path": "src/server/SeedData.lua",
           "Carrot Seed": {
+           "$className": "Folder",
+           "Cost": {
+            "$className": "IntValue"
+           },
+           "DisplayName": {
+            "$className": "StringValue"
+           },
+           "SeedPrefix": {
+            "$className": "StringValue"
+           },
+           "Icon": {
+            "$className": "StringValue"
+           },
+           "GrowthTime": {
+            "$className": "NumberValue"
+           },
+           "HarvestCount": {
+            "$className": "IntValue"
+           },
+           "MultiHarvest": {
+            "$className": "BoolValue"
+           },
+           "HarvestInterval": {
+            "$className": "IntValue"
+           },
+           "Server": {
+            "$className": "Folder",
+            "CurrentStock": {
+            "$className": "IntValue"
+           },
+            "MaxStock": {
+            "$className": "IntValue"
+           }
+          }
+         },
+          "Cacao Seed": {
            "$className": "Folder",
            "Cost": {
             "$className": "IntValue"
