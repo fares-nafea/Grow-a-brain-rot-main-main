@@ -69,6 +69,10 @@ function Service.createServerModel(player: Player, key: string, data: any)
         serverModel:SetAttribute("Owner", player.UserId)
         serverModel:SetAttribute("Plot", Service.getPlot(player).Name)
 
+        -- Scaling on PlantScaling
+        serverModel:ScaleTo(data.PlantSize)
+        --
+
         local serverConfig = script.ServerModelConfig:Clone()
         serverConfig.Name = "ServerConfiguration"
 
@@ -76,6 +80,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
         serverConfig.DatePlanted.Value = data.DatePlanted
         serverConfig.GrowthPercentage.Value = data.GrowthPercentage
         serverConfig.LastGrowthincrement.Value = data.LastGrowthIncrement
+        serverConfig.PlantSize.Value = data.PlantSize
 
 
         for index: number, fruitData: any in data.Fruits do
@@ -84,6 +89,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
             fruitConfig.CanHarvest.Value = fruitData.CanHarvest
             fruitConfig.LastHarvest.Value = fruitData.LastHarvest
             fruitConfig.Mutations.Value = fruitData.Mutations
+            fruitConfig.SizeScaling.Value = fruitData.SizeScaling
             fruitConfig.Parent = serverConfig.Fruits
 
             -- Updating Folder

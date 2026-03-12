@@ -21,7 +21,7 @@ repeat task.wait() until player:GetAttribute("DataLoaded") == true
 
 task.wait(1)
 
-local function harvestableChanged(serverModel: Model, clientModel: Model, fruitNumber: string, harvestable: boolean, MultiHarvest: boolean)
+local function harvestableChanged(serverModel: Model, clientModel: Model, fruitNumber: string, harvestable: boolean, multiHarvest: boolean)
 	task.spawn(function()
 		if harvestable == true then
 			if clientModel:GetAttribute("FullyGrown") == false then
@@ -29,7 +29,7 @@ local function harvestableChanged(serverModel: Model, clientModel: Model, fruitN
 			end
 			-- Enabling Prmopt
 			task.spawn(function()
-				if MultiHarvest then
+				if multiHarvest then
 					serverModel.FruitPrompts[fruitNumber].HarvestPrompt.Enabled = true
 				else
 					serverModel["PrimaryPart"].HarvestPrompt.Enabled = true
@@ -97,6 +97,9 @@ local function childAdded(child: Instance)
 		if foundModel then
 			local clientModel: Model = foundModel.ClientModel:Clone()
 			clientModel.Name = identifier
+
+			clientModel:ScaleTo(child.ServerConfiguration.PlantSize.Value)
+
 			clientModel:PivotTo(child:GetPivot())
 
 			-- Default Visibilty of Parts
