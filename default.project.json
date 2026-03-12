@@ -20,33 +20,272 @@
         "Crops": {
           "$className": "Folder"
         },
-        "Part": {
-          "$className": "Part"
-        },
-        "Part ": {
-          "$className": "Part"
-        },
         "PlantEffect": {
+        "$className": "Model",
+        "PrimaryPart": {
+          "$className": "Part"
+        }
+      },
+      "Plants": {
+        "$className": "Folder",
+        "Carrot": {
+          "$className": "Folder",
+          "ServerModel": {
             "$className": "Model",
             "PrimaryPart": {
               "$className": "Part"
+            }
+          },
+          "ClientModel": {
+            "1": {
+              "$className": "Part"
+            },
+            "2": {
+              "$className": "Part"
+            },
+            "4": {
+              "$className": "Part"
+            },
+            "$className": "Model",
+            "PrimaryPart": {
+              "$className": "Part"
+            }
           }
         },
-        "Plants": {
+        "Blueberry": {
           "$className": "Folder",
-          "Blueberry": {
-            "$className": "Folder"
+          "ServerModel": {
+            "$className": "Model",
+            "FruitPrompts": {
+              "1": {
+                "$className": "Part"
+              },
+              "2": {
+                "$className": "Part"
+              },
+              "3": {
+                "$className": "Part"
+              },
+              "$className": "Folder"
+            },
+            "PrimaryPart": {
+              "$className": "Part"
+            }
           },
-          "Cacao": {
-            "$className": "Folder"
-          },
-          "Carrot": {
-            "$className": "Folder"
-          },
-          "Tomato": {
-            "$className": "Folder"
+          "ClientModel": {
+            "$className": "Model",
+            "fruit_1": {
+              "$className": "Model",
+              "EffectPart": {
+                "$className": "Part"
+              },
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "fruit_2": {
+              "$className": "Model",
+              "EffectPart": {
+                "$className": "Part"
+              },
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "fruit_3": {
+              "$className": "Model",
+              "EffectPart": {
+                "$className": "Part"
+              },
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "PrimaryPart": {
+              "$className": "Part"
+            }
           }
-
+        },
+        "Cacao": {
+          "$className": "Folder",
+          "ServerModel": {
+            "$className": "Model",
+            "FruitPrompts": {
+              "1": {
+                "$className": "Part"
+              },
+              "2": {
+                "$className": "Part"
+              },
+              "3": {
+                "$className": "Part"
+              },
+              "4": {
+                "$className": "Part"
+              },
+              "$className": "Folder"
+            },
+            "PrimaryPart": {
+              "$className": "Part"
+            }
+          },
+          "ClientModel": {
+            "$className": "Model",
+            "mainModel": {
+              "$className": "Model",
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "fruit_1": {
+              "$className": "Model",
+              "EffectPart": {
+                "$className": "Part"
+              },
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "fruit_2": {
+              "$className": "Model",
+              "EffectPart": {
+                "$className": "Part"
+              },
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "fruit_3": {
+              "$className": "Model",
+              "EffectPart": {
+                "$className": "Part"
+              },
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "fruit_4": {
+              "$className": "Model",
+              "EffectPart": {
+                "$className": "Part"
+              },
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "PrimaryPart": {
+              "$className": "Part"
+            }
+          }
+        },
+        "Tomato": {
+          "$className": "Folder",
+          "ServerModel": {
+            "$className": "Model",
+            "FruitPrompts": {
+              "1": {
+                "$className": "Part"
+              },
+              "2": {
+                "$className": "Part"
+              },
+              "$className": "Folder"
+            },
+            "PrimaryPart": {
+              "$className": "Part"
+            }
+          },
+          "ClientModel": {
+            "$className": "Model",
+            "fruit_1": {
+              "$className": "Model",
+              "EffectPart": {
+                "$className": "Part"
+              },
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "fruit_2": {
+              "$className": "Model",
+              "EffectPart": {
+                "$className": "Part"
+              },
+              "PrimaryPart": {
+                "$className": "Part"
+              }
+            },
+            "Model": {
+              "$className": "Model"
+            },
+            "PrimaryPart": {
+              "$className": "Part"
+            }
+          }
+        }
+      }
+      },
+      "Crops": {
+        "$className": "Folder",
+        "Blueberry": {
+          "$className": "Tool",
+          "Handle": {
+            "$className": "Part"
+          }
+        },
+        "Cacao": {
+          "$className": "Tool",
+          "Handle": {
+            "$className": "Part"
+          }
+        },
+        "Carrot": {
+          "$className": "Tool",
+          "Handle": {
+            "$className": "Part"
+          }
+        },
+        "Tomato": {
+          "$className": "Tool",
+          "Handle": {
+            "$className": "Part"
+          }
+        }
+      },
+      "RainbowEffectPart": {
+        "$className": "Part",
+        "RainbowEffect": {
+          "$className": "Attachment",
+          "ParticleEmitter": {
+            "$className": "ParticleEmitter"
+          },
+          "Shards": {
+            "$className": "ParticleEmitter"
+          },
+          "flares": {
+            "$className": "ParticleEmitter"
+          },
+          "USING": {
+            "$className": "ParticleEmitter"
+          },
+          "Squares": {
+            "$className": "ParticleEmitter"
+          },
+          "Star2": {
+            "$className": "ParticleEmitter"
+          }
+        }
+      },
+      "GoldMutationEffectPart": {
+        "$className": "Part",
+        "GoldMutationEffect": {
+          "$className": "Attachment",
+          "flares": {
+            "$className": "ParticleEmitter"
+          },
+          "ParticleEmitter": {
+            "$className": "ParticleEmitter"
+          }
         }
       },
 
