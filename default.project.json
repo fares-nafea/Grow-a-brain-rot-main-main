@@ -525,15 +525,21 @@
                 "$className": "Part"
               },
               "Part15": {
-                "$className": "Part"
+                "$className": "Part",
+                "Weld": {
+                  "$className": "Weld"
+                }
               },
               "Part16": {
                 "$className": "Part"
               },
               "Part17": {
-                "$className": "Part"
+                "$className": "Part",
+                "Weld": {
+                  "$className": "Weld"
+                }
               },
-              "Par18": {
+              "Part18": {
                 "$className": "Part",
                 "Weld": {
                   "$className": "Weld"
