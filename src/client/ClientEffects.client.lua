@@ -1,4 +1,4 @@
---- Client Effect 
+-- ClientEffects Listener
 
 local replicatedStorage = game:GetService("ReplicatedStorage")
 
@@ -9,14 +9,14 @@ local clientEffects = modules.ClientEffects
 local cachedModules = {}
 
 for _,v in clientEffects:GetChildren() do
-    if v:IsA("ModuleScript") then
-        cachedModules[v.Name] = require(v)
-    end
+	if v:IsA("ModuleScript") then
+		cachedModules[v.Name] = require(v)
+	end
 end
 
 remotes.ClientEffects.OnClientEvent:Connect(function(Action, Data)
-    local found = cachedModules[Action]
-    if found then
-        found(Data)
-    end
+	local found = cachedModules[Action]
+	if found then
+		found(Data)
+	end
 end)

@@ -21,4 +21,4 @@ for moduleName: string, moduleScript in cachedModules do
 	end
 end
 
-warn("Game services loaded in "..os.clock()-startTime.."s")
+warn("Game services loaded in ".. os.clock()-startTime.."s")
