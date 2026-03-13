@@ -1050,7 +1050,10 @@
         "$className": "StarterPlayerScripts",
 
         "PromptClient": {
-          "$path": "src/client/PromptClient.client.lua"
+          "$path": "src/client/PromptClient.client.lua",
+          "HarvestHighlight": {
+            "$className": "Highlight"
+          }
         },
         "ResetDisable": {
           "$path": "src/client/ResetDisable.client.lua"
