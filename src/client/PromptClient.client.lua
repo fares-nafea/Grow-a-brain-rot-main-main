@@ -9,7 +9,7 @@ local playerGui: PlayerGui = localPlayer:WaitForChild("PlayerGui", math.huge)
 
 local remotes = replicatedStorage:WaitForChild("Remotes")
 
-local mainGui = playerGui:WaitForChild("MainGui")
+local mainGui = playerGui:WaitForChild("MainGui", 10)
 local eventsFolder = mainGui:WaitForChild("Events")
 
 proximityPromptService.PromptShown:Connect(function(prompt: ProximityPrompt, inputType: Enum.ProximityPromptInputType)
