@@ -14,7 +14,7 @@ local serverInfo = replicatedStorage:WaitForChild("ServerInfo")
 local eventsFolder = mainGui:WaitForChild("Events")
 local root = mainGui:WaitForChild("Root")
 
-local seedsFrame = root.Frames.SeedsFrame
+local seedsFrame = root.Frames.SeedFrame
 local configurationFolder = mainGui:WaitForChild("Configuration")
 
 -- Default

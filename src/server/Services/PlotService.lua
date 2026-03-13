@@ -80,7 +80,7 @@ function Service.createServerModel(player: Player, key: string, data: any)
 		-- Assigning Configuration Values for Easy Viewing on Client/Server
 		serverConfig.DatePlanted.Value = data.DatePlanted
 		serverConfig.GrowthPercentage.Value = data.GrowthPercentage
-		serverConfig.LastGrowthIncrement.Value = data.LastGrowthIncrement
+		serverConfig.LastGrowthincrement.Value = data.LastGrowthIncrement
 		serverConfig.PlantSize.Value = data.PlantSize
 		
 		for index: number, fruitData: any in data.Fruits do
@@ -238,7 +238,7 @@ function Service.init()
 				local serverConfig = crop:FindFirstChild("ServerConfiguration")
 				if serverConfig then
 					local growthPercentage = serverConfig.GrowthPercentage
-					local lastGrowthIncrement = serverConfig.LastGrowthIncrement
+					local lastGrowthincrement = serverConfig.LastGrowthincrement
 					local datePlanted = serverConfig.DatePlanted
 					
 					local seedName = crop.Name:split(":")[1].. " Seed"
@@ -278,9 +278,9 @@ function Service.init()
 							end
 						else
 							local growthTime = foundSeed.GrowthTime.Value
-							if os.time()-lastGrowthIncrement.Value >= 1 then
+							if os.time()-lastGrowthincrement.Value >= 1 then
 								-- Increment
-								lastGrowthIncrement.Value = os.time()
+								lastGrowthincrement.Value = os.time()
 								growthPercentage.Value = math.clamp(
 									((os.time()-datePlanted.Value)/growthTime)*100,
 									0,

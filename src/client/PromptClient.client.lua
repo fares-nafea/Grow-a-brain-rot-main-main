@@ -22,7 +22,7 @@ proximityPromptService.PromptShown:Connect(function(prompt: ProximityPrompt, inp
 end)
 proximityPromptService.PromptHidden:Connect(function(prompt: ProximityPrompt)
 	if prompt.Name == "HarvestPrompt" then
-		script.HarvestHighlight.Adornee = nil
+		script.Highlight.Adornee = nil
 	end
 end)
 proximityPromptService.PromptTriggered:Connect(function(prompt: ProximityPrompt)

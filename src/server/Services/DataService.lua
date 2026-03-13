@@ -9,7 +9,7 @@ local profileStore = require(script.ProfileStore)
 local profileTemplate = require(script.Template)
 local cachedModules = require(script.Parent.Parent.Server.CachedModules)
 
-local PlayerStore = profileStore.New("PlayerStore_006", profileTemplate)
+local PlayerStore = profileStore.New("PlayerStore_018", profileTemplate)
 
 local Service = {
 	Profiles = {}
