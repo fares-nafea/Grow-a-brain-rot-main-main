@@ -1105,6 +1105,52 @@
 
           "Frames": {
             "$className": "Frame",
+            "SellFrame": {
+              "$className": "Frame",
+              "ImageFrame": {
+                "$className": "ImageLabel"
+              },
+              "List": {
+                "$className": "ScrollingFrame",
+
+                "BulkSell": {
+                  "$className": "Frame",
+                  "ImageFrame": {
+                    "$className": "ImageLabel"
+                  },
+                  "Main": {
+                    "$className": "Frame",
+                    "ImageButton": {
+                      "$className": "ImageButton"
+                    }
+                  }
+                },
+                "SellEquipped": {
+                  "$className": "Frame",
+                  "ImageFrame": {
+                    "$className": "ImageLabel"
+                  },
+                  "Main": {
+                    "$className": "Frame",
+                    "ImageButton": {
+                      "$className": "ImageButton"
+                    }
+                  }
+                },
+                "Worth": {
+                  "$className": "Frame",
+                  "ImageFrame": {
+                    "$className": "ImageLabel"
+                  },
+                  "Main": {
+                    "$className": "Frame",
+                    "ImageButton": {
+                      "$className": "ImageButton"
+                    }
+                  }
+                }
+              }
+            },
 
             "SeedFrame": {
               "$className": "Frame",
